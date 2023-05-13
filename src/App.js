@@ -9,6 +9,8 @@ import { Route, Routes } from "react-router-dom";
 import ExpolreExercises from "./pages/ExpolreExercises";
 import ProtectedtRoutes from "./components/ProtectedtRoutes";
 import ExerciseDetail from "./pages/ExerciseDetail";
+import Workshops from "./pages/Workshops";
+import VideoWorkshop from "./pages/VideoWorkshop";
 
 function App() {
   // window.localStorage.setItem("access", "");
@@ -27,7 +29,7 @@ function App() {
             </ProtectedtRoutes>
           }
         />
-        {/* <Route
+        <Route
             path="/workshops"
             element={
               <ProtectedtRoutes>
@@ -39,12 +41,12 @@ function App() {
             path="/videoapp/:roomId"
             element={
               <ProtectedtRoutes>
-                <VideoApp />
+                <VideoWorkshop />
               </ProtectedtRoutes>
             }
           />
 
-           */}
+          
         <Route
           path="/search-exercises"
           element={
