@@ -11,6 +11,7 @@ import ProtectedtRoutes from "./components/ProtectedtRoutes";
 import ExerciseDetail from "./pages/ExerciseDetail";
 import Workshops from "./pages/Workshops";
 import VideoWorkshop from "./pages/VideoWorkshop";
+import ExercisePlanGenerator from "./pages/ExercisePlanGenerator";
 
 function App() {
   // window.localStorage.setItem("access", "");
@@ -22,6 +23,10 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route
+          path="/generate-exercise-plan"
+          element={<ExercisePlanGenerator />}
+        />
+        <Route
           path="/exercise/:id"
           element={
             <ProtectedtRoutes>
@@ -30,23 +35,22 @@ function App() {
           }
         />
         <Route
-            path="/workshops"
-            element={
-              <ProtectedtRoutes>
-                <Workshops />
-              </ProtectedtRoutes>
-            }
-          />
-          <Route
-            path="/videoapp/:roomId"
-            element={
-              <ProtectedtRoutes>
-                <VideoWorkshop />
-              </ProtectedtRoutes>
-            }
-          />
+          path="/workshops"
+          element={
+            <ProtectedtRoutes>
+              <Workshops />
+            </ProtectedtRoutes>
+          }
+        />
+        <Route
+          path="/videoapp/:roomId"
+          element={
+            <ProtectedtRoutes>
+              <VideoWorkshop />
+            </ProtectedtRoutes>
+          }
+        />
 
-          
         <Route
           path="/search-exercises"
           element={

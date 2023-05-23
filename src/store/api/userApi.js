@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import { setUser } from "../UserSlice";
+import { setUser, setUserFav } from "../UserSlice";
 
 // eslint-disable-next-line no-undef
 const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
@@ -26,7 +26,7 @@ export const userApi = createApi({
           // Authorization: `Bearer ${data.access}`
         };
       },
-      providesTags:["User"],
+      providesTags: ["User"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -35,6 +35,18 @@ export const userApi = createApi({
           /* empty */
         }
       },
+    }),
+    toggleFav: builder.mutation({
+      query({ exId, action }) {
+        return {
+          url: `exercises/favourites/?action=${action}&ex_id=${exId}`,
+          method: "POST",
+        };
+      },
+      async onQueryStarted(args,{dispatch, queryFulfilled}) {
+        const {data} = await queryFulfilled;
+        dispatch(setUserFav(data.exercises));
+      }
     }),
   }),
 });

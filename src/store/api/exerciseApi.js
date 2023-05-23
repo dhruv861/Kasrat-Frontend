@@ -61,5 +61,6 @@ export const {
   useFilterExercisebyEquipmentQuery,
   useGetBodyPartsQuery,
   useGetExercisesQuery,
-  useGetExerciseByIdQuery
+  useGetExerciseByIdQuery,
+
 } = exerciseAPi;

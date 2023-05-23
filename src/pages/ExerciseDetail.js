@@ -20,7 +20,7 @@ const ExerciseDetail = () => {
   const { id } = useParams();
 
   const exerciseDetailData = useGetExerciseByIdQuery(id);
-  console.log(exerciseDetailData.data);
+  // console.log(exerciseDetailData.data);
 
   const targetMuscleExercisesData = useFilterExerciseByTargetQuery(
     exerciseDetailData.data?.target
@@ -77,7 +77,7 @@ const ExerciseDetail = () => {
   }
 
   return (
-    <Box sx={{ mt: { lg: "96px", xs: "60px" } }}>
+    <Box >
       <Navbar />
       {!exerciseDetailData.isSuccess &&
         !equimentExercisesData.isSuccess &&

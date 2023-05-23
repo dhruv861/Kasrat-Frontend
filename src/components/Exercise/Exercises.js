@@ -12,7 +12,7 @@ const Exercises = ({ bodyPart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
   const exercises = useSelector((state) => state.exercise.exercises);
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchExercisesData = async () => {
@@ -20,7 +20,7 @@ const Exercises = ({ bodyPart }) => {
 
       if (bodyPart === "all") {
         // console.log("inside all");
-        const res = await fetch(`${BASE_URL}/api/exercises/`);
+        const res = await fetch(`${BASE_URL}/exercises/`);
         exercisesData = await res.json();
       } else if (bodyPart) {
         console.log("inside else");

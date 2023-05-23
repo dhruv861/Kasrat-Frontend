@@ -2,12 +2,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { userApi } from "../../store/api/userApi";
+import { useDispatch } from "react-redux";
 // import styles from "./exercisecard.module.css";
 // import { userContext } from "../utils/Context";
 
 const ExerciseCard = ({ exercise }) => {
-  // const ctx = useContext(userContext);
-  // console.log(ctx.user);
+  
+  const user = useSelector((state) => state.userProfile.user);
+  const dispatch = useDispatch();
+
+  console.log("favourites", user?.favourites);
+  const fav = user?.favourites.some((fav) => fav.id == exercise.id);
+  console.log(fav);
+
+  const addToFavourites = () => {
+    console.log(exercise.id);
+    dispatch(userApi.endpoints.toggleFav.initiate({action:"add",exId: exercise.id}));
+  };
 
   return (
     <div className="exercise-card">
@@ -17,7 +30,7 @@ const ExerciseCard = ({ exercise }) => {
           ml="21px"
           color="#000"
           fontWeight="bold"
-          sx={{ fontSize: { lg: "24px", xs: "20px" } }}
+          sx={{ fontSize: { lg: "20px", xs: "16px" } }}
           mt="11px"
           pb="10px"
           textTransform="capitalize"
@@ -50,18 +63,34 @@ const ExerciseCard = ({ exercise }) => {
         >
           {exercise.target}
         </Button>
-        <Button
-          sx={{
-            ml: "21px",
-            color: "#fff",
-            background: "darksalmon",
-            fontSize: "14px",
-            borderRadius: "20px",
-            textTransform: "capitalize",
-          }}
-        >
-          Favourites
-        </Button>
+        {fav ? (
+          <Button
+            sx={{
+              ml: "21px",
+              color: "#fff",
+              background: "darksalmon",
+              fontSize: "14px",
+              borderRadius: "20px",
+              textTransform: "capitalize",
+            }}
+          >
+            Favourites
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              ml: "21px",
+              color: "#fff",
+              background: "darksalmon",
+              fontSize: "14px",
+              borderRadius: "20px",
+              textTransform: "capitalize",
+            }}
+            onClick={addToFavourites}
+          >
+            Add to Favourites
+          </Button>
+        )}
       </Stack>
     </div>
   );

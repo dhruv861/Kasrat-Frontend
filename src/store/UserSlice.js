@@ -16,9 +16,14 @@ export const UserSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setUserFav: (state, action) => {
+      if(state.user){
+      state.user.favourites=action.payload;
+      }
+    }
   },
 });
 
 export default UserSlice.reducer;
 
-export const { setUser, logout } = UserSlice.actions;
+export const { setUser, logout ,setUserFav} = UserSlice.actions;

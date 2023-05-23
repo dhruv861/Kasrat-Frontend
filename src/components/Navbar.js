@@ -21,12 +21,12 @@ const Navbar = () => {
       window.localStorage.getItem("refresh") &&
       !user
     ) {
-      console.log("logged in", user);
+      // console.log("logged in", user);
       dispatch(userApi.endpoints.getUserDetails.initiate(null));
     }
   }, [user]);
 
-  // console.log("user", user);
+  console.log("user", user);
   return (
     <>
       <Stack
@@ -34,7 +34,7 @@ const Navbar = () => {
         justifyContent="space-around"
         sx={{
           gap: { sm: "123px", xs: "40px" },
-          mt: { sm: "32px", xs: "20px" },
+          // mt: { sm: "32px", xs: "20px" },
           justifyContent: "none",
         }}
         px="20px"
