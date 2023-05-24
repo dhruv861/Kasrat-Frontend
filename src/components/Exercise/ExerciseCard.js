@@ -13,12 +13,12 @@ const ExerciseCard = ({ exercise }) => {
   const user = useSelector((state) => state.userProfile.user);
   const dispatch = useDispatch();
 
-  console.log("favourites", user?.favourites);
+  // console.log("favourites", user?.favourites);
   const fav = user?.favourites.some((fav) => fav.id == exercise.id);
-  console.log(fav);
+  // console.log(fav);
 
   const addToFavourites = () => {
-    console.log(exercise.id);
+    // console.log(exercise.id);
     dispatch(userApi.endpoints.toggleFav.initiate({action:"add",exId: exercise.id}));
   };
 

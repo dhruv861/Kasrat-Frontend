@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { setBodyParts, setExercises } from "../../store/ExerciseSlice";
-import { fetchExercisesData } from "../../store/ExerciseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HorizontalScrollBarNew from "./HorizontalScrollBarNew";
+import {
+  useGetExercisesQuery,
+  useGetBodyPartsQuery,
+} from "../../store/api/exerciseApi";
 
-import { userApi } from "../../store/api/userApi";
 const SearchExercises = ({ bodyPart, setBodyPart }) => {
   const dispatch = useDispatch();
-  const { data, isSuccess, error } = dispatch(
-    userApi.endpoints.getUserDetails.initiate(null)
-  );
+  const getExerciseData = useGetExercisesQuery();
+  const getBodyParts = useGetBodyPartsQuery();
   const [search, setSearch] = useState("");
-  const exercise = useSelector((state) => state.exercise.exercises);
+  // const exercise = useSelector((state) => state.exercise.exercises);
   // const [bodyPart, setBodyPart] = useState("");
   const bodyParts = useSelector((state) => state.exercise.bodyParts);
-  console.log(data, isSuccess, error);
 
   useEffect(() => {
     const fetchBodyPartsData = async () => {
-      const res = await fetch("http://127.0.0.1:8000/api/exercises/bodyparts/");
-      const bodyPartsData = await res.json();
-      dispatch(setBodyParts(["all", ...bodyPartsData]));
+      if (getBodyParts.isSuccess) {
+        dispatch(setBodyParts(["all", ...getBodyParts.data]));
+      }
     };
-
     fetchBodyPartsData();
-  }, [data, isSuccess]);
-
+  }, [getBodyParts.data]);
   const handleSearch = async () => {
     if (search) {
-      dispatch(fetchExercisesData(search));
-      const searchedExercises = exercise.filter(
+      console.log(search);
+      console.log("----->>", getExerciseData.data);
+      const searchedExercises = getExerciseData.data.filter(
         (item) =>
           item.name.toLowerCase().includes(search) ||
           item.target.toLowerCase().includes(search) ||

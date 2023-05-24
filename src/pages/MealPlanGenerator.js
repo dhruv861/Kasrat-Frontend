@@ -7,28 +7,13 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import PreferenceForm from "../components/PreferenceForm";
-import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
-
-const ExercisePlanGenerator = () => {
-  const [open, setOpen] = React.useState(false);
-  // const [plan, setPlan] = React.useState(false)
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [getExercisePlan, { isLoading, isSuccess, data, error, isError }] =
-    useGetExercisePlanMutation();
-
-  useEffect(() => {
-    if (isLoading) {
-      console.log("loading.....");
-    }
-    if (isSuccess) {
-      console.log(data);
-    }
-    if (isError) {
-      console.log(error);
-    }
-  });
+const MealPlanGenerator = () => {
+    const [open, setOpen] = React.useState(false);
+    // const [plan, setPlan] = React.useState(false)
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    
   return (
     <>
       <Navbar />
@@ -134,9 +119,9 @@ const ExercisePlanGenerator = () => {
           </div>
         </Fade>
       </Modal>
-      {isSuccess && data && <ExercisePlan plan={data} />}
+      <ExercisePlan plan={data} />
     </>
   );
-};
+}
 
-export default ExercisePlanGenerator;
+export default MealPlanGenerator

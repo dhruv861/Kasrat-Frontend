@@ -6,21 +6,80 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { Label } from "@mui/icons-material";
 import { Button, FormHelperText } from "@mui/material";
 
-const PreferenceForm = () => {
+const PreferenceForm = ({getExercisePlan,closeModal}) => {
     const [days, setDays] = useState([])
     const [equipment, setEquipment] = useState("");
     const [bodypart, setBodypart] = useState("")
     const [targetMuscles, setTargetMuscles] =useState("")
-    const [workoutTime, setWorkoutTime] = useState("")    
+    const [workoutTime, setWorkoutTime] = useState("")
+        
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
   const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  const EQUIPMENT = [
+    "body weight",
+    "cable",
+    "leverage machine",
+    "assisted",
+    "medicine ball",
+    "stability ball",
+    "band",
+    "barbell",
+    "rope",
+    "dumbbell",
+    "ez barbell",
+    "sled machine",
+    "upper body ergometer",
+    "kettlebell",
+    "olympic barbell",
+    "weighted",
+    "bosu ball",
+    "resistance band",
+    "roller",
+    "skierg machine",
+    "hammer",
+    "smith machine",
+    "wheel roller",
+    "stationary bike",
+    "tire",
+    "trap bar",
+    "elliptical machine",
+    "stepmill machine",
+  ];
+  const BODYPART=[
+    "waist",
+    "upper legs",
+    "back",
+    "lower legs",
+    "chest",
+    "upper arms",
+    "cardio",
+    "shoulders",
+    "lower arms",
+    "neck"
+]
+  const TARGET_MUSCLES = [
+    "abs",
+    "quads",
+    "lats",
+    "calves",
+    "pectorals",
+    "glutes",
+    "hamstrings",
+    "adductors",
+    "triceps",
+    "cardiovascular system",
+    "spine",
+    "upper back",
+    "biceps",
+    "delts",
+    "forearms",
+    "traps",
+    "serratus anterior",
+    "abductors",
+    "levator scapulae",
+  ];
   const handleDays = (event) => {
     const {
       target: { value },
@@ -68,7 +127,15 @@ const PreferenceForm = () => {
    };
 
   const generatePlan=() => {
-    console.log(days,bodypart,equipment,targetMuscles)
+    console.log(days,bodypart,equipment,targetMuscles,workoutTime)
+    getExercisePlan({
+      preferences: {
+        equipment: equipment,
+        body_parts: bodypart,
+        target_muscles: targetMuscles,
+      },
+    })
+    closeModal()
   }
 
   return (
@@ -122,12 +189,11 @@ const PreferenceForm = () => {
           label="Equipment"
           onChange={handleEquipment}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {EQUIPMENT.map((item) => (
+            <MenuItem value={item} key={item}>
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </MenuItem>
+          ))}
         </Select>
         <FormHelperText>Select a Equipment </FormHelperText>
       </FormControl>
@@ -141,18 +207,19 @@ const PreferenceForm = () => {
           label="BodyPart"
           onChange={handleBodypart}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {BODYPART.map((item) => (
+            <MenuItem value={item} key={item}>
+              {item.charAt(0).toUpperCase() + item.slice(1)}{" "}
+            </MenuItem>
+          ))}
         </Select>
         <FormHelperText>Select a Bodypart</FormHelperText>
       </FormControl>
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Target Muscles</InputLabel>
+        <InputLabel id="demo-simple-select-helper-label">
+          Target Muscles
+        </InputLabel>
         <Select
           labelId="target-muscles"
           id="target-muscles"
@@ -160,12 +227,11 @@ const PreferenceForm = () => {
           label="Target Muscles"
           onChange={handleTargetMuscle}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {TARGET_MUSCLES.map((item) => (
+            <MenuItem value={item} key={item}>
+              {item.charAt(0).toUpperCase() + item.slice(1)}{" "}
+            </MenuItem>
+          ))}
         </Select>
         <FormHelperText>Select a Bodypart</FormHelperText>
       </FormControl>
@@ -181,12 +247,10 @@ const PreferenceForm = () => {
           label="time"
           onChange={handleWorkoutTime}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={30}>30 min</MenuItem>
+          <MenuItem value={60}>1 hour</MenuItem>
+          <MenuItem value={90}>1 hour 30 min</MenuItem>
+          <MenuItem value={120}>2 hour</MenuItem>
         </Select>
         <FormHelperText>Available Time</FormHelperText>
       </FormControl>

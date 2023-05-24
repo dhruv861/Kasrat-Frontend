@@ -52,6 +52,15 @@ export const exerciseAPi = createApi({
         };
       },
     }),
+    getExercisePlan:builder.mutation({
+      query(preferences){
+        return {
+          url: "exercise-plan/generate/",
+          method:"POST",
+          body:preferences
+        };
+      }
+    })
   }),
 });
 
@@ -62,5 +71,5 @@ export const {
   useGetBodyPartsQuery,
   useGetExercisesQuery,
   useGetExerciseByIdQuery,
-
+  useGetExercisePlanMutation
 } = exerciseAPi;
