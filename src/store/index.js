@@ -5,6 +5,7 @@ import { userApi } from "./api/userApi";
 import userReducer from "./UserSlice";
 import { exerciseAPi } from "./api/exerciseApi";
 import { workshopApi } from "./api/workshopApi";
+import { mealPlanApi } from "./api/mealPlanApi";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [exerciseAPi.reducerPath]: exerciseAPi.reducer,
     [workshopApi.reducerPath]: workshopApi.reducer,
+    [mealPlanApi.reducerPath]: mealPlanApi.reducer,
     userProfile: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -21,6 +23,7 @@ export const store = configureStore({
       userApi.middleware,
       exerciseAPi.middleware,
       workshopApi.middleware,
+      mealPlanApi.middleware,
     ]),
 });
 

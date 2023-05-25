@@ -5,8 +5,6 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userApi } from "../../store/api/userApi";
 import { useDispatch } from "react-redux";
-// import styles from "./exercisecard.module.css";
-// import { userContext } from "../utils/Context";
 
 const ExerciseCard = ({ exercise }) => {
   

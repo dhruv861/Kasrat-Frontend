@@ -12,6 +12,7 @@ import ExerciseDetail from "./pages/ExerciseDetail";
 import Workshops from "./pages/Workshops";
 import VideoWorkshop from "./pages/VideoWorkshop";
 import ExercisePlanGenerator from "./pages/ExercisePlanGenerator";
+import MealPlanGenerator from "./pages/MealPlanGenerator";
 
 function App() {
   // window.localStorage.setItem("access", "");
@@ -26,6 +27,7 @@ function App() {
           path="/generate-exercise-plan"
           element={<ExercisePlanGenerator />}
         />
+        <Route path="/generate-meal-plan" element={<MealPlanGenerator/>}/> 
         <Route
           path="/exercise/:id"
           element={

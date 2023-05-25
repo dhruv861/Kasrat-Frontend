@@ -1,19 +1,32 @@
 import React, { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import ExercisePlanBanner from "../assets/images/exercise-plan-banner.jpg";
 import Navbar from "../components/Navbar";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
-import PreferenceForm from "../components/PreferenceForm";
-import ExercisePlan from "../components/Exercise/ExercisePlan";
+import MealPlanImage from "../assets/images/amoon-ra-n8vDuIpGb0c-unsplash-removebg-preview.png";
+import { useGetMealPlanQuery } from "../store/api/mealPlanApi";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+
+import MealPreferenceForm from "../components/MealPreferenceForm";
+import MealPlan from "../components/MealPlan";
 const MealPlanGenerator = () => {
-    const [open, setOpen] = React.useState(false);
-    // const [plan, setPlan] = React.useState(false)
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    
+  const [open, setOpen] = React.useState(false);
+  const [preference, setPreference] = React.useState(skipToken);
+  const [plan, setPlan] = React.useState(null)
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const result = useGetMealPlanQuery(preference);
+
+  useEffect(() => {
+    if(result.data){
+    console.log("MEAL PLAN", result.data?.week);
+        setPlan(result.data.week);
+    }
+    console.log("", preference);
+  }, [preference, result]);
+
   return (
     <>
       <Navbar />
@@ -27,7 +40,7 @@ const MealPlanGenerator = () => {
         p="20px"
       >
         <Typography color="#FF2625" fontWeight="800" fontSize="34px">
-          Generate Exercise Plan
+          Generate Meal Plan
         </Typography>
         <Typography
           fontWeight={600}
@@ -35,17 +48,17 @@ const MealPlanGenerator = () => {
           mb="23px"
           mt="30px"
         >
-          Elevate Your Workout <br />
-          Tailored Exercise Plans at Your Fingertips
+          Elevate Your Meals, <br />
+          Elevate Your Life!
         </Typography>
         <div className="checkout">
           <Typography fontSize="22px" fontFamily="Alegreya" lineHeight="35px">
-            Create your personalized exercise plan with the Exercise Plan
-            Generator. Select your equipment, target body parts, and desired
-            muscles, and let the algorithm generate a customized weekly workout
-            plan just for you. Achieve your fitness goals effectively and stay
-            motivated with a tailored exercise plan that suits your preferences
-            and needs.
+            Unlock precise meal planning with our innovative platform. Using the
+            BMR Calculator, we create personalized week-long meal plans based on
+            your exact calorie needs. Enjoy delicious recipes and balanced
+            nutrients, effortlessly reaching your health goals. Take control,
+            elevate your habits, and transform your lifestyle with our intuitive
+            meal planner.
           </Typography>
         </div>
         <Stack>
@@ -68,7 +81,7 @@ const MealPlanGenerator = () => {
           </Button>
         </Stack>
         <img
-          src={ExercisePlanBanner}
+          src={MealPlanImage}
           alt="hero-banner"
           className="hero-banner-img"
         />
@@ -111,17 +124,17 @@ const MealPlanGenerator = () => {
               >
                 Preferences
               </Typography>
-              <PreferenceForm
-                getExercisePlan={getExercisePlan}
+              <MealPreferenceForm
+                setPreference={setPreference}
                 closeModal={handleClose}
               />
             </Box>
           </div>
         </Fade>
       </Modal>
-      <ExercisePlan plan={data} />
+      {plan && <MealPlan plan={plan} />}
     </>
   );
-}
+};
 
-export default MealPlanGenerator
+export default MealPlanGenerator;
