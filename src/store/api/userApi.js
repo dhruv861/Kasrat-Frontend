@@ -18,6 +18,7 @@ export const userApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
+    
     getUserDetails: builder.query({
       query() {
         return {

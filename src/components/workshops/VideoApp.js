@@ -17,7 +17,7 @@ import { useGetRoomCodeByRoleQuery } from "../../store/api/workshopApi";
 export default function VideoApp() {
   const { roomId } = useParams();
   const [roomCode, setRoomCode] = useState("");
-  const fetchRoomCode = useGetRoomCodeByRoleQuery({ role: "host", roomId });
+  const fetchRoomCode = useGetRoomCodeByRoleQuery({ role: "guest", roomId });
 
   useEffect(() => {
     // const fetchRoomCode = async () => {
