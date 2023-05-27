@@ -8,21 +8,23 @@ import bicepcurls from "../../assets/images/bicepcurls.png";
 import crunches from "../../assets/images/crunches.png";
 import pushups from "../../assets/images/pushup.png";
 import squats from "../../assets/images/squats.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
+import Navbar from "../Navbar";
 
 const styles = {
   webcam: {
     position: "absolute",
     marginRight: "auto",
-    marginLeft: "auto",
+    marginLeft: "2%",
     left: 0,
     right: 800,
     top: 200,
     textAlign: "center",
     zIndex: 9,
     width: 960,
-    height: 720,
+    height: 600,
+    border: "outset",
   },
   countBox: {
     position: "absolute",
@@ -34,7 +36,7 @@ const styles = {
     width: 400,
     height: 100,
   },
-  selectBox: {
+    selectBox: {
     position: "absolute",
     marginRight: "auto",
     marginLeft: "auto",
@@ -44,7 +46,7 @@ const styles = {
     textAlign: "center",
     width: 400,
     color: "#05386B",
-    background: "#8EE4AF",
+    background: "#ece9e6",
   },
   back: {
     position: "absolute",
@@ -82,17 +84,18 @@ const exrInfo = {
 let count = 0;
 let dir = 0;
 let angle = 0;
-function WorkoutCounter(props) {
-  //const [exr, setExr] = useState("bicepCurls");
 
+function WorkoutCounter() {
+  //const [exr, setExr] = useState("bicepCurls");
+  const { exercise } = useParams();
   let imgSource;
-  if (props.exercise === "bicepCurls") {
+  if (exercise === "bicepCurls") {
     imgSource = bicepcurls;
-  } else if (props.exercise === "squats") {
+  } else if (exercise === "squats") {
     imgSource = squats;
-  } else if (props.exercise === "pushups") {
+  } else if (exercise === "pushups") {
     imgSource = pushups;
-  } else if (props.exercise === "crunches") {
+  } else if (exercise === "crunches") {
     imgSource = crunches;
   }
 
@@ -104,13 +107,16 @@ function WorkoutCounter(props) {
   let camera = null;
   const countTextbox = useRef(null);
 
-   const angleBetweenThreePoints = (pos)=> {
+  const angleBetweenThreePoints = (pos) => {
     //console.log("Reached angle")
     //vertexed around p1
 
-    const a = Math.pow(pos[1].x - pos[0].x, 2) + Math.pow(pos[1].y - pos[0].y, 2);
-    const b = Math.pow(pos[1].x - pos[2].x, 2) + Math.pow(pos[1].y - pos[2].y, 2);
-    const c = Math.pow(pos[2].x - pos[0].x, 2) + Math.pow(pos[2].y - pos[0].y, 2);
+    const a =
+      Math.pow(pos[1].x - pos[0].x, 2) + Math.pow(pos[1].y - pos[0].y, 2);
+    const b =
+      Math.pow(pos[1].x - pos[2].x, 2) + Math.pow(pos[1].y - pos[2].y, 2);
+    const c =
+      Math.pow(pos[2].x - pos[0].x, 2) + Math.pow(pos[2].y - pos[0].y, 2);
 
     //angle in radians
     //var resultRadian = Math.acos(((Math.pow(p12, 2)) + (Math.pow(p13, 2)) - (Math.pow(p23, 2))) / (2 * p12 * p13));
@@ -119,7 +125,7 @@ function WorkoutCounter(props) {
     var resultDegree =
       (Math.acos((a + b - c) / Math.sqrt(4 * a * b)) * 180) / Math.PI;
     return resultDegree;
-  }
+  };
 
   function onResult(results) {
     if (results.poseLandmarks) {
@@ -133,7 +139,7 @@ function WorkoutCounter(props) {
 
       //ratios between 0-1, covert them to pixel positions
       const upadatedPos = [];
-      const indexArray = exrInfo[props.exercise].index;
+      const indexArray = exrInfo[exercise].index;
 
       for (let i = 0; i < 3; i += 1) {
         upadatedPos.push({
@@ -147,19 +153,19 @@ function WorkoutCounter(props) {
 
       // Count reps
       //0 is down, 1 is up
-      if (angle > exrInfo[props.exercise].ul) {
-        console.log("test angle ",angle)
+      if (angle > exrInfo[exercise].ul) {
+        console.log("test angle ", angle);
         if (dir === 0) {
           //count.current = count.current + 0.5
           console.log(count, " ", dir, " decrement ", angle);
           dir = 1;
         }
       }
-      if (angle < exrInfo[props.exercise].ll && dir === 1) {
-        console.log("complete")
-            count = count + 1;
-            console.log(count, " ", dir, " increment ", angle);
-            dir = 0;
+      if (angle < exrInfo[exercise].ll && dir === 1) {
+        console.log("complete");
+        count = count + 1;
+        console.log(count, " ", dir, " increment ", angle);
+        dir = 0;
       }
 
       //console.log(count.current)
@@ -236,21 +242,33 @@ function WorkoutCounter(props) {
 
   return (
     <div>
+      <Navbar />
       <div style={styles.selectBox}>
         <h1>Bicep Curls</h1>
-        <img src={imgSource} width="300" alt="bicepimage"></img>
+        <img
+          style={{ margin: "0 13%" }}
+          src={imgSource}
+          width="300"
+          alt="bicepimage"
+        ></img>
         <br></br>
         <div style={{ top: 50 }}>
           <h1>Count</h1>
           <input
             ref={countTextbox}
             value={count}
-            style={{ height: 50, fontSize: 40, width: 80,textAlign:"center" }}
+            style={{
+              height: 50,
+              fontSize: 40,
+              width: 80,
+              textAlign: "center",
+              margin: "0 40%",
+            }}
           />
           <br></br>
           <br></br>
           <Button
-            style={{ top: 15 }}
+            style={{ top: 15, backgroundColor: "rgb(255, 38, 37)" }}
             size="large"
             variant="contained"
             color="primary"

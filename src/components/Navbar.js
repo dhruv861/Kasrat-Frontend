@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Stack, Chip, Avatar } from "@mui/material";
+import { Button, Stack, Chip, Avatar, Popover } from "@mui/material";
 import Logo from "../assets/images/Logo.png";
 import { useSelector } from "react-redux";
 import { logout } from "../store/UserSlice";
@@ -12,7 +12,9 @@ const Navbar = () => {
   const user = useSelector((state) => state.userProfile.user);
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const dispatch = useDispatch();
- 
+ const [anchorEl, setAnchorEl] = React.useState(null);
+ const open = Boolean(anchorEl);
+ const id = open ? "simple-popover" : undefined;
 
   
   useEffect(() => {
@@ -74,19 +76,8 @@ const Navbar = () => {
                   </Avatar>
                 }
                 label={user && user.name}
+                onClick={(event) => setAnchorEl(event.currentTarget)}
               />
-              {/* <Button
-                onClick={logoutHandler}
-                style={{
-                  textDecoration: "none",
-                  color: "#3A1212",
-                  borderBottom: "3px solid #FF2625",
-                }}
-              >
-                <span className="material-symbols-outlined">account_circle</span>
-                {/* {userProfile && userProfile.name} 
-              </Button> */}
-
               <Button
                 onClick={() => {
                   dispatch(logout());
@@ -99,10 +90,6 @@ const Navbar = () => {
               >
                 Log Out
               </Button>
-
-              {/* <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                           <ProfileModal />
-                         </Modal> */}
             </>
           ) : (
             <>
@@ -135,6 +122,28 @@ const Navbar = () => {
                          </a> */}
             </>
           )}
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <Button
+              onClick={() => {
+                dispatch(logout())
+                setAnchorEl(null);
+              }}
+              style={{
+                color: "#3A1212",
+              }}
+            >
+              Log Out
+            </Button>
+          </Popover>
         </Stack>
       </Stack>
     </>

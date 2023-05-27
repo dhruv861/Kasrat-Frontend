@@ -57,7 +57,7 @@ const Exercises = ({ bodyPart }) => {
   };
 
   if (exercises.length === 0) {
-    return <p>Select a Exercise</p>;
+    return 
   }
 
   if (!currentExercises.length) {

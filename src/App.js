@@ -14,8 +14,9 @@ import VideoWorkshop from "./pages/VideoWorkshop";
 import ExercisePlanGenerator from "./pages/ExercisePlanGenerator";
 import MealPlanGenerator from "./pages/MealPlanGenerator";
 import WorkoutCounter from "./components/WorkoutTracker/workoutCounter";
-import NewLogin from "./pages/NewLogin";
+// import NewLogin from "./pages/NewLogin";
 import UserDashboard from "./pages/UserDashboard";
+import WorkoutTracker from "./pages/WorkoutTracker";
 
 function App() {
   // window.localStorage.setItem("access", "");
@@ -32,7 +33,8 @@ function App() {
           element={<ExercisePlanGenerator />}
         />
         <Route path="/generate-meal-plan" element={<MealPlanGenerator/>}/> 
-        <Route path="/track-workout" element={<WorkoutCounter exercise={"bicepCurls"}/>}/>
+        <Route path="/workout" element={<WorkoutTracker/>}/>
+        <Route path="/track-workout/:exercise" element={<WorkoutCounter />}/>
         <Route
           path="/exercise/:id"
           element={

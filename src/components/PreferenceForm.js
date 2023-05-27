@@ -8,15 +8,22 @@ import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { Button, FormHelperText } from "@mui/material";
 
-const PreferenceForm = ({getExercisePlan,closeModal}) => {
-    const [days, setDays] = useState([])
-    const [equipment, setEquipment] = useState("");
-    const [bodypart, setBodypart] = useState("")
-    const [targetMuscles, setTargetMuscles] =useState("")
-    const [workoutTime, setWorkoutTime] = useState("")
-        
+const PreferenceForm = ({ getExercisePlan, closeModal }) => {
+  const [days, setDays] = useState([]);
+  const [equipment, setEquipment] = useState("");
+  const [bodypart, setBodypart] = useState("");
+  const [targetMuscles, setTargetMuscles] = useState("");
+  const [workoutTime, setWorkoutTime] = useState("");
 
-  const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  const DAYS = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
   const EQUIPMENT = [
     "body weight",
     "cable",
@@ -47,7 +54,7 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
     "elliptical machine",
     "stepmill machine",
   ];
-  const BODYPART=[
+  const BODYPART = [
     "waist",
     "upper legs",
     "back",
@@ -57,8 +64,8 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
     "cardio",
     "shoulders",
     "lower arms",
-    "neck"
-]
+    "neck",
+  ];
   const TARGET_MUSCLES = [
     "abs",
     "quads",
@@ -80,74 +87,37 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
     "abductors",
     "levator scapulae",
   ];
-  const handleDays = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDays(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-  const handleEquipment = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setEquipment(
-      // On autofill we get a stringified value.
-       value
-    );
-  };
-  const handleBodypart = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setBodypart(
-      // On autofill we get a stringified value.
-       value
-    );
-  };
-  const handleWorkoutTime = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setWorkoutTime(
-      // On autofill we get a stringified value.
-      value
-    );
-  };
-   const handleTargetMuscle = (event) => {
-     const {
-       target: { value },
-     } = event;
-     setTargetMuscles(
-       // On autofill we get a stringified value.
-       value
-     );
-   };
 
-  const generatePlan=() => {
-    console.log(days,bodypart,equipment,targetMuscles,workoutTime)
+  const generatePlan = () => {
+    console.log(days, bodypart, equipment, targetMuscles, workoutTime);
     getExercisePlan({
       preferences: {
         equipment: equipment,
         body_parts: bodypart,
         target_muscles: targetMuscles,
+        days,
+        workoutTime,
       },
-    })
-    closeModal()
-  }
+    });
+    closeModal();
+  };
 
   return (
     <div style={{ display: "grid" }}>
-      <FormControl sx={{ m: 1, minWidth: 120 }} label="Training Days">
-        <InputLabel id="equipment">Training Days</InputLabel>
+      <FormControl required sx={{ m: 1, minWidth: 120 }} label="Training Days">
+        <InputLabel id="days">Training Days</InputLabel>
         <Select
-          labelId="equipment"
-          id="equipment"
+          labelId="days"
+          id="days"
           multiple
           value={days}
-          onChange={handleDays}
+          onChange={(e) =>
+            setDays(
+              typeof e.target.value === "string"
+                ? e.target.value.split(",")
+                : e.target.value
+            )
+          }
           input={
             <OutlinedInput id="select-multiple-chip" label="Training Days" />
           }
@@ -158,14 +128,6 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
               ))}
             </Box>
           )}
-          //   MenuProps={{
-          //     PaperProps: {
-          //       style: {
-          //         maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-          //         width: 250,
-          //       },
-          //     },
-          //   }}
         >
           {DAYS.map((name) => (
             <MenuItem
@@ -180,14 +142,14 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
         <FormHelperText>Days you want to workout </FormHelperText>
       </FormControl>
 
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} required>
         <InputLabel id="demo-simple-select-helper-label">Equipment</InputLabel>
         <Select
           labelId="equipment"
           id="equipment"
           value={equipment}
           label="Equipment"
-          onChange={handleEquipment}
+          onChange={(e) =>setEquipment(e.target.value)}
         >
           {EQUIPMENT.map((item) => (
             <MenuItem value={item} key={item}>
@@ -199,13 +161,13 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
       </FormControl>
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">BodyPart</InputLabel>
+        <InputLabel id="bodypart">BodyPart</InputLabel>
         <Select
           labelId="bodypart"
           id="bodypart"
           value={bodypart}
           label="BodyPart"
-          onChange={handleBodypart}
+          onChange={(e)=>setBodypart(e.target.value)}
         >
           {BODYPART.map((item) => (
             <MenuItem value={item} key={item}>
@@ -217,15 +179,13 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
       </FormControl>
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">
-          Target Muscles
-        </InputLabel>
+        <InputLabel id="target-muscles">Target Muscles</InputLabel>
         <Select
           labelId="target-muscles"
           id="target-muscles"
           value={targetMuscles}
           label="Target Muscles"
-          onChange={handleTargetMuscle}
+          onChange={(e)=>setTargetMuscles(e.target.value)}
         >
           {TARGET_MUSCLES.map((item) => (
             <MenuItem value={item} key={item}>
@@ -237,15 +197,13 @@ const PreferenceForm = ({getExercisePlan,closeModal}) => {
       </FormControl>
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">
-          Workout Time
-        </InputLabel>
+        <InputLabel id="time">Workout Duration</InputLabel>
         <Select
           labelId="time"
           id="time"
           value={workoutTime}
           label="time"
-          onChange={handleWorkoutTime}
+          onChange={(e)=>setWorkoutTime(e.target.value)}
         >
           <MenuItem value={30}>30 min</MenuItem>
           <MenuItem value={60}>1 hour</MenuItem>

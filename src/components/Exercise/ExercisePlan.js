@@ -142,7 +142,7 @@ function a11yProps(index) {
   };
 }
 
-export default function ExercisePlan({ plan }) {
+export default function ExercisePlan({ plan, days }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const tabPanelStyle = {
@@ -168,7 +168,10 @@ export default function ExercisePlan({ plan }) {
       <Typography style={{ textAlign: "center", margin: "10px" }} variant="h4">
         Exercise Plan
       </Typography>
-      <AppBar style={{ backgroundColor: "rgb(0 0 0 / 5%)" , color:"black" }} position="static">
+      <AppBar
+        style={{ backgroundColor: "rgb(0 0 0 / 5%)", color: "black" }}
+        position="static"
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -177,13 +180,17 @@ export default function ExercisePlan({ plan }) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Monday" {...a11yProps(0)} />
+          {days?.map((day, i) => (
+            <Tab label={day} key={day} {...a11yProps(i)} />
+          ))}
+
+          {/* <Tab label="Monday" {...a11yProps(0)} />
           <Tab label="Tuesday" {...a11yProps(1)} />
           <Tab label="Wednesday" {...a11yProps(2)} />
           <Tab label="Thursday" {...a11yProps(3)} />
           <Tab label="Friday" {...a11yProps(4)} />
           <Tab label="Saturday" {...a11yProps(5)} />
-          <Tab label="Sunday" {...a11yProps(6)} />
+          <Tab label="Sunday" {...a11yProps(6)} /> */}
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -193,49 +200,49 @@ export default function ExercisePlan({ plan }) {
       >
         <TabPanel value={value} index={0}>
           <div style={tabPanelStyle}>
-            {plan?.monday.map((ex) => (
+            {plan?.Monday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <div style={tabPanelStyle}>
-            {plan?.tuesday.map((ex) => (
+            {plan?.Tuesday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
           <div style={tabPanelStyle}>
-            {plan?.wednesday.map((ex) => (
+            {plan?.Wednesday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={3}>
           <div style={tabPanelStyle}>
-            {plan?.thursday.map((ex) => (
+            {plan?.Thursday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={4}>
           <div style={tabPanelStyle}>
-            {plan?.friday.map((ex) => (
+            {plan?.Friday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={5}>
           <div style={tabPanelStyle}>
-            {plan?.saturday.map((ex) => (
+            {plan?.Saturday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
         </TabPanel>
         <TabPanel value={value} index={6}>
           <div style={tabPanelStyle}>
-            {plan?.sunday.map((ex) => (
+            {plan?.Sunday?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>

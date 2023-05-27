@@ -134,7 +134,7 @@ const ExercisePlanGenerator = () => {
           </div>
         </Fade>
       </Modal>
-      {isSuccess && data && <ExercisePlan plan={data} />}
+      {isSuccess && data && <ExercisePlan plan={data} days={Object.keys(data)} />}
     </>
   );
 };
