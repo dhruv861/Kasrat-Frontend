@@ -17,6 +17,7 @@ import WorkoutCounter from "./components/WorkoutTracker/workoutCounter";
 // import NewLogin from "./pages/NewLogin";
 import UserDashboard from "./pages/UserDashboard";
 import WorkoutTracker from "./pages/WorkoutTracker";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   // window.localStorage.setItem("access", "");
@@ -24,17 +25,18 @@ function App() {
   return (
     <Box width="400px" sx={{ width: { xl: "1488px" } }} m="auto">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/userDashboard" element={<UserDashboard/>}/>
+        <Route path="/userDashboard" element={<UserDashboard />} />
         <Route
           path="/generate-exercise-plan"
           element={<ExercisePlanGenerator />}
         />
-        <Route path="/generate-meal-plan" element={<MealPlanGenerator/>}/> 
-        <Route path="/workout" element={<WorkoutTracker/>}/>
-        <Route path="/track-workout/:exercise" element={<WorkoutCounter />}/>
+        <Route path="/generate-meal-plan" element={<MealPlanGenerator />} />
+        <Route path="/workout" element={<WorkoutTracker />} />
+        <Route path="/track-workout/:exercise" element={<WorkoutCounter />} />
         <Route
           path="/exercise/:id"
           element={

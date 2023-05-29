@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import styles from "./styles/dashboard.module.css";
+import styles from "../assets/styles/dashboard.module.css";
 
 const UserDashboard = () => {
   return (

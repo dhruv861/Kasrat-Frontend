@@ -11,9 +11,11 @@ const ExpolreExercises = () => {
   return (
     <Box>
       <Navbar />
+      <section id="search">
       <SearchExercises bodyPart={bodyPart} setBodyPart={setBodyPart} />
       <Exercises bodyPart={bodyPart} />
       <Footer />
+      </section>
     </Box>
   );
 };

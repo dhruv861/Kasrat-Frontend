@@ -31,110 +31,116 @@ const ExercisePlanGenerator = () => {
   });
   return (
     <>
-      <Navbar />
-      <Box
-        sx={{
-          mt: { lg: "70px", xs: "30px" },
-          ml: { sm: "50px" },
-          mr: { lg: "70px" },
-        }}
-        position="relative"
-        p="20px"
-      >
-        <Typography color="#FF2625" fontWeight="800" fontSize="34px">
-          Generate Exercise Plan
-        </Typography>
-        <Typography
-          fontWeight={600}
-          sx={{ fontSize: { lg: "26px", xs: "20px" }, width: "50%" }}
-          mb="23px"
-          mt="30px"
+      <section id="#generate">
+        <Navbar />
+        <Box
+          sx={{
+            mt: { lg: "70px", xs: "30px" },
+            ml: { sm: "50px" },
+            mr: { lg: "70px" },
+          }}
+          position="relative"
+          p="20px"
         >
-          Elevate Your Workout <br />
-          Tailored Exercise Plans at Your Fingertips
-        </Typography>
-        <div className="checkout">
-          <Typography fontSize="22px" fontFamily="Alegreya" lineHeight="35px">
-            Create your personalized exercise plan with the Exercise Plan
-            Generator. Select your equipment, target body parts, and desired
-            muscles, and let the algorithm generate a customized weekly workout
-            plan just for you. Achieve your fitness goals effectively and stay
-            motivated with a tailored exercise plan that suits your preferences
-            and needs.
+          <Typography color="#FF2625" fontWeight="800" fontSize="34px">
+            Generate Exercise Plan
           </Typography>
-        </div>
-        <Stack>
-          <Button
-            onClick={handleOpen}
-            style={{
-              marginTop: "45px",
-              textDecoration: "none",
-              width: "200px",
-              textAlign: "center",
-              background: "#FF2625",
-              padding: "14px",
-              fontSize: "22px",
-              textTransform: "none",
-              color: "white",
-              borderRadius: "4px",
-            }}
+          <Typography
+            fontWeight={600}
+            sx={{ fontSize: { lg: "26px", xs: "20px" }, width: "50%" }}
+            mb="23px"
+            mt="30px"
           >
-            Generate Now
-          </Button>
-        </Stack>
-        <img
-          src={ExercisePlanBanner}
-          alt="hero-banner"
-          className="hero-banner-img"
-        />
-      </Box>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <div style={{ overflow: "hidden", overflowY: "scroll" }}>
-            <Box
-              sx={{
-                overflow: "hidden",
-                overflowY: "scroll",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: 600,
-                bgcolor: "background.paper",
-                border: "2px solid #000",
-                boxShadow: 24,
-                p: 4,
+            Elevate Your Workout <br />
+            Tailored Exercise Plans at Your Fingertips
+          </Typography>
+          <div className="checkout">
+            <Typography fontSize="22px" fontFamily="Alegreya" lineHeight="35px">
+              Create your personalized exercise plan with the Exercise Plan
+              Generator. Select your equipment, target body parts, and desired
+              muscles, and let the algorithm generate a customized weekly
+              workout plan just for you. Achieve your fitness goals effectively
+              and stay motivated with a tailored exercise plan that suits your
+              preferences and needs.
+            </Typography>
+          </div>
+          <Stack>
+            <Button
+              onClick={handleOpen}
+              style={{
+                marginTop: "45px",
+                textDecoration: "none",
+                width: "200px",
+                textAlign: "center",
+                background: "#FF2625",
+                padding: "14px",
+                fontSize: "22px",
+                textTransform: "none",
+                color: "white",
+                borderRadius: "4px",
               }}
             >
-              <Typography
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="Preference"
-                variant="h5"
-                component="h2"
+              Generate Now
+            </Button>
+          </Stack>
+          <img
+            src={ExercisePlanBanner}
+            alt="hero-banner"
+            className="hero-banner-img"
+          />
+        </Box>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500,
+            },
+          }}
+        >
+          <Fade in={open}>
+            <div style={{ overflow: "hidden", overflowY: "scroll" }}>
+              <Box
+                sx={{
+                  overflow: "hidden",
+                  overflowY: "scroll",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: 600,
+                  bgcolor: "background.paper",
+                  border: "2px solid #000",
+                  boxShadow: 24,
+                  p: 4,
+                }}
               >
-                Preferences
-              </Typography>
-              <PreferenceForm
-                getExercisePlan={getExercisePlan}
-                closeModal={handleClose}
-              />
-            </Box>
-          </div>
-        </Fade>
-      </Modal>
-      {isSuccess && data && <ExercisePlan plan={data} days={Object.keys(data)} />}
+                <Typography
+                  style={{ textAlign: "center", marginBottom: "10px" }}
+                  id="Preference"
+                  variant="h5"
+                  component="h2"
+                >
+                  Preferences
+                </Typography>
+                <PreferenceForm
+                  getExercisePlan={getExercisePlan}
+                  closeModal={handleClose}
+                />
+              </Box>
+            </div>
+          </Fade>
+        </Modal>
+      </section>
+      <section id="exercise-plan">
+        {isSuccess && data && (
+          <ExercisePlan plan={data} days={Object.keys(data)} />
+        )}
+      </section>
     </>
   );
 };

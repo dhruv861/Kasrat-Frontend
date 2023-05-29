@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { Button, FormHelperText } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const PreferenceForm = ({ getExercisePlan, closeModal }) => {
   const [days, setDays] = useState([]);
@@ -14,6 +15,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
   const [bodypart, setBodypart] = useState("");
   const [targetMuscles, setTargetMuscles] = useState("");
   const [workoutTime, setWorkoutTime] = useState("");
+  const navigate = useNavigate()
 
   const DAYS = [
     "Monday",
@@ -100,6 +102,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
       },
     });
     closeModal();
+    navigate("/generate-exercise-plan/#exercise-plan")
   };
 
   return (
