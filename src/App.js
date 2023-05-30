@@ -18,12 +18,25 @@ import WorkoutCounter from "./components/WorkoutTracker/workoutCounter";
 import UserDashboard from "./pages/UserDashboard";
 import WorkoutTracker from "./pages/WorkoutTracker";
 import LandingPage from "./pages/LandingPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   // window.localStorage.setItem("access", "");
   // window.localStorage.setItem("refresh", "");
   return (
     <Box width="400px" sx={{ width: { xl: "1488px" } }} m="auto">
+      <div>
+        <Toaster
+          toastOptions={{
+            className: "",
+            duration: 1000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+          }}
+        />
+      </div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
@@ -54,7 +67,7 @@ function App() {
           }
         />
         <Route
-          path="/videoapp/:roomId"
+          path="/virtual-training/:name/:roomId"
           element={
             <ProtectedtRoutes>
               <VideoWorkshop />

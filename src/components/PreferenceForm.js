@@ -8,6 +8,8 @@ import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { Button, FormHelperText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 
 const PreferenceForm = ({ getExercisePlan, closeModal }) => {
   const [days, setDays] = useState([]);
@@ -15,7 +17,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
   const [bodypart, setBodypart] = useState("");
   const [targetMuscles, setTargetMuscles] = useState("");
   const [workoutTime, setWorkoutTime] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const DAYS = [
     "Monday",
@@ -92,17 +94,23 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
 
   const generatePlan = () => {
     console.log(days, bodypart, equipment, targetMuscles, workoutTime);
-    getExercisePlan({
-      preferences: {
-        equipment: equipment,
-        body_parts: bodypart,
-        target_muscles: targetMuscles,
-        days,
-        workoutTime,
-      },
-    });
-    closeModal();
-    navigate("/generate-exercise-plan/#exercise-plan")
+    if (days && bodypart && equipment && targetMuscles && workoutTime) {
+      getExercisePlan({
+        preferences: {
+          equipment: equipment,
+          body_parts: bodypart,
+          target_muscles: targetMuscles,
+          days,
+          workoutTime,
+        },
+      });
+      closeModal();
+      navigate("/generate-exercise-plan/#exercise-plan");
+    }
+    else{
+      toast.error("All the fields are required.!!!")
+    }
+    
   };
 
   return (
@@ -152,7 +160,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
           id="equipment"
           value={equipment}
           label="Equipment"
-          onChange={(e) =>setEquipment(e.target.value)}
+          onChange={(e) => setEquipment(e.target.value)}
         >
           {EQUIPMENT.map((item) => (
             <MenuItem value={item} key={item}>
@@ -170,7 +178,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
           id="bodypart"
           value={bodypart}
           label="BodyPart"
-          onChange={(e)=>setBodypart(e.target.value)}
+          onChange={(e) => setBodypart(e.target.value)}
         >
           {BODYPART.map((item) => (
             <MenuItem value={item} key={item}>
@@ -188,7 +196,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
           id="target-muscles"
           value={targetMuscles}
           label="Target Muscles"
-          onChange={(e)=>setTargetMuscles(e.target.value)}
+          onChange={(e) => setTargetMuscles(e.target.value)}
         >
           {TARGET_MUSCLES.map((item) => (
             <MenuItem value={item} key={item}>
@@ -206,7 +214,7 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
           id="time"
           value={workoutTime}
           label="time"
-          onChange={(e)=>setWorkoutTime(e.target.value)}
+          onChange={(e) => setWorkoutTime(e.target.value)}
         >
           <MenuItem value={30}>30 min</MenuItem>
           <MenuItem value={60}>1 hour</MenuItem>

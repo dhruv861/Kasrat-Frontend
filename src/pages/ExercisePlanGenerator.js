@@ -9,16 +9,39 @@ import Button from "@mui/material/Button";
 import PreferenceForm from "../components/PreferenceForm";
 import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
+import { userApi } from "../store/api/userApi";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+// import { useBeforeUnload } from "react-router-dom";
 
 const ExercisePlanGenerator = () => {
   const [open, setOpen] = React.useState(false);
+  const [isSave, setIsSave] = React.useState(false);
   // const [plan, setPlan] = React.useState(false)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
   const [getExercisePlan, { isLoading, isSuccess, data, error, isError }] =
     useGetExercisePlanMutation();
+  const userplan = useSelector((state) => state.userProfile.exerciseplan);
+  dispatch(userApi.endpoints.getPlan.initiate());
+
+  const onUnload = (e) => {
+    e.preventDefault();
+    if (data && isSuccess && !isSave) {
+      return (e.returnValue = "Are You Sure ?");
+    } else {
+      return (e.returnValue = "");
+    }
+  };
 
   useEffect(() => {
+    toast("Hello World");
+    window.addEventListener("beforeunload", onUnload);
+
+    if (userplan) {
+      console.log(userplan);
+    }
     if (isLoading) {
       console.log("loading.....");
     }
@@ -28,9 +51,13 @@ const ExercisePlanGenerator = () => {
     if (isError) {
       console.log(error);
     }
-  });
+    return () => {
+      window.removeEventListener("beforeunload", onUnload);
+    };
+  }, [userplan]);
   return (
     <>
+     
       <section id="#generate">
         <Navbar />
         <Box
@@ -138,7 +165,18 @@ const ExercisePlanGenerator = () => {
       </section>
       <section id="exercise-plan">
         {isSuccess && data && (
-          <ExercisePlan plan={data} days={Object.keys(data)} />
+          <>
+            <ExercisePlan plan={data} days={Object.keys(data)} />
+            <Button
+              onClick={() => {
+                dispatch(userApi.endpoints.savePlan.initiate(data));
+                setIsSave(true);
+              }}
+              style={{ marginLeft: "80%", marginBottom: "5%" }}
+            >
+              Save The Plan
+            </Button>
+          </>
         )}
       </section>
     </>

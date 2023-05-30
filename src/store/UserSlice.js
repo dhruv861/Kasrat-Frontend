@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
+  exerciseplan:null
 };
 
 export const UserSlice = createSlice({
@@ -20,10 +21,13 @@ export const UserSlice = createSlice({
       if(state.user){
       state.user.favourites=action.payload;
       }
+    },
+    setExercisePlan:(state, action) => {
+      state.exerciseplan = action.payload;
     }
   },
 });
 
 export default UserSlice.reducer;
 
-export const { setUser, logout ,setUserFav} = UserSlice.actions;
+export const { setUser, logout ,setUserFav ,setExercisePlan} = UserSlice.actions;

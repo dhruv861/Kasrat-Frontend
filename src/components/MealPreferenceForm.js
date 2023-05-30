@@ -9,10 +9,11 @@ import {
   InputAdornment,
   OutlinedInput,
 } from "@mui/material";
+import { toast } from "react-hot-toast";
 
 const CUISINE = ["Asian", "Indian", "Thai", "American", "Italian", "Chinese"];
 
-const MealPreferenceForm = ({closeModal, setPreference }) => {
+const MealPreferenceForm = ({ closeModal, setPreference }) => {
   const [gender, setGender] = useState([]);
   const [goal, setGoal] = useState("");
   const [diet, setDiet] = useState("");
@@ -35,17 +36,21 @@ const MealPreferenceForm = ({closeModal, setPreference }) => {
   };
 
   const generatePlan = () => {
-    console.log(gender, goal, diet, cuisine, weight, height, age);
-    const BMR = calcBMR(weight, height, age, gender);
-    let calories = BMR
-    if(goal=="maintain"){
-        calories = BMR * 1.25
-    }else if (goal == "weight gain") {
-      calories = BMR * 1.75;
+    if (gender && goal && diet && cuisine && weight && height && age) {
+      console.log(gender, goal, diet, cuisine, weight, height, age);
+      const BMR = calcBMR(weight, height, age, gender);
+      let calories = BMR;
+      if (goal == "maintain") {
+        calories = BMR * 1.25;
+      } else if (goal == "weight gain") {
+        calories = BMR * 1.75;
+      }
+      console.log("BMR", BMR, calories);
+      setPreference({ diet, calories });
+      closeModal();
+    } else {
+      toast.error("All the fields are required.");
     }
-    console.log("BMR", BMR , calories);
-    setPreference({diet,calories})
-    closeModal()
   };
 
   return (

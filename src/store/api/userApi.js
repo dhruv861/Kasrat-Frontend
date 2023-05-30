@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import { setUser, setUserFav } from "../UserSlice";
+import { setUser, setUserFav, setExercisePlan } from "../UserSlice";
 
 // eslint-disable-next-line no-undef
 const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
@@ -18,7 +18,6 @@ export const userApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    
     getUserDetails: builder.query({
       query() {
         return {
@@ -44,10 +43,30 @@ export const userApi = createApi({
           method: "POST",
         };
       },
-      async onQueryStarted(args,{dispatch, queryFulfilled}) {
-        const {data} = await queryFulfilled;
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
         dispatch(setUserFav(data.exercises));
-      }
+      },
+    }),
+    savePlan: builder.mutation({
+      query(plan) {
+        return {
+          url: "exercise-plan/save/",
+          method: "POST",
+          body: { plan },
+        };
+      },
+    }),
+    getPlan: builder.query({
+      query() {
+        return {
+          url: "exercise-plan/save/",
+        };
+      },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        dispatch(setExercisePlan(data));
+      },
     }),
   }),
 });

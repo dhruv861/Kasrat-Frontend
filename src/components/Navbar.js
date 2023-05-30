@@ -8,15 +8,13 @@ import { useDispatch } from "react-redux";
 import { userApi } from "../store/api/userApi";
 
 const Navbar = () => {
-
   const user = useSelector((state) => state.userProfile.user);
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const dispatch = useDispatch();
- const [anchorEl, setAnchorEl] = React.useState(null);
- const open = Boolean(anchorEl);
- const id = open ? "simple-popover" : undefined;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
-  
   useEffect(() => {
     if (
       window.localStorage.getItem("access") &&
@@ -134,7 +132,7 @@ const Navbar = () => {
           >
             <Button
               onClick={() => {
-                dispatch(logout())
+                dispatch(logout());
                 setAnchorEl(null);
               }}
               style={{

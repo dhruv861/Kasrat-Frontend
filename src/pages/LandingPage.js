@@ -336,7 +336,7 @@ const LandingPage = () => {
 
                 <div className="light-rounded-buttons">
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="btn primary-btn-outline"
                   >
                     Start free trial

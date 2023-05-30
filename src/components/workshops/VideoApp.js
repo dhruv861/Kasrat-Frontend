@@ -11,29 +11,20 @@ import {
 import Header from "./Header";
 import EnterRoom from "./EnterRoom";
 import Footer from "./Footer";
-import DeviceSettings from "./DeviceSettings";
+// import DeviceSettings from "./DeviceSettings";
 import { useParams } from "react-router-dom";
 import { useGetRoomCodeByRoleQuery } from "../../store/api/workshopApi";
 export default function VideoApp() {
-  const { roomId } = useParams();
+  const { roomId, name } = useParams();
   const [roomCode, setRoomCode] = useState("");
   const fetchRoomCode = useGetRoomCodeByRoleQuery({ role: "guest", roomId });
 
   useEffect(() => {
-    // const fetchRoomCode = async () => {
-    //   const res = await fetch(
-    //     `http://127.0.0.1:8000/api/workshops/room-code/host/${roomId}`
-    //   );
-    //   const data = await res.json();
-    //   console.log(data?.code);
-    //   setRoomCOde(data?.code);
-    // };
-    // // fetchRoomCode();
     if (fetchRoomCode.isSuccess) {
       console.log(fetchRoomCode.data.code);
       setRoomCode(fetchRoomCode.data.code);
-    }else{
-      console.log("...loadingRoomCOde")
+    } else {
+      console.log("...loadingRoomCOde");
     }
   }, [fetchRoomCode]);
 
@@ -52,8 +43,7 @@ export default function VideoApp() {
       <Header />
       {isConnected ? (
         <>
-          <Conference /> <Footer />
-          <DeviceSettings />
+          <Conference name={name} /> <Footer />
         </>
       ) : (
         <EnterRoom code={roomCode} />

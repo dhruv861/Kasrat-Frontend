@@ -8,17 +8,6 @@ const Workshops = () => {
   const [rooms, setRooms] = useState([]);
   const fetchRooms = useGetRoomsQuery();
   useEffect(() => {
-    // const fetchRooms = async () => {
-    //   const res = await fetch("http://localhost:8000/api/workshops/rooms/");
-    //   const data = await res.json();
-    //   // console.log("aaaaaaa", data);
-    //   if (res.ok) {
-    //     setRooms(data.rooms);
-    //   } else {
-    //     console.log(res.status);
-    //   }
-    // };
-    // fetchRooms();
     if (fetchRooms.isSuccess) {
       console.log(fetchRooms.data.rooms)
       setRooms(fetchRooms.data.rooms);

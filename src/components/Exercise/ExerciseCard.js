@@ -7,19 +7,10 @@ import { userApi } from "../../store/api/userApi";
 import { useDispatch } from "react-redux";
 
 const ExerciseCard = ({ exercise }) => {
-  
   const user = useSelector((state) => state.userProfile.user);
   const dispatch = useDispatch();
-
-  // console.log("favourites", user?.favourites);
   const fav = user?.favourites.some((fav) => fav.id == exercise.id);
-  // console.log(fav);
-
-  const addToFavourites = () => {
-    // console.log(exercise.id);
-    dispatch(userApi.endpoints.toggleFav.initiate({action:"add",exId: exercise.id}));
-  };
-
+  
   return (
     <div className="exercise-card">
       <Link to={`/exercise/${exercise.id}`}>
@@ -45,6 +36,10 @@ const ExerciseCard = ({ exercise }) => {
             fontSize: "14px",
             borderRadius: "20px",
             textTransform: "capitalize",
+            "&:hover": {
+              background: "#fff",
+              color: "#FFA9A9",
+            },
           }}
         >
           {exercise.bodyPart}
@@ -57,6 +52,10 @@ const ExerciseCard = ({ exercise }) => {
             fontSize: "14px",
             borderRadius: "20px",
             textTransform: "capitalize",
+            "&:hover": {
+              background: "#fff",
+              color: "#FCC757",
+            },
           }}
         >
           {exercise.target}
@@ -70,9 +69,21 @@ const ExerciseCard = ({ exercise }) => {
               fontSize: "14px",
               borderRadius: "20px",
               textTransform: "capitalize",
+              "&:hover": {
+                background: "#fff",
+                color: "darksalmon",
+              },
             }}
+            onClick={() =>
+              dispatch(
+                userApi.endpoints.toggleFav.initiate({
+                  action: "remove",
+                  exId: exercise.id,
+                })
+              )
+            }
           >
-            Favourites
+            Remove from Favourites
           </Button>
         ) : (
           <Button
@@ -83,8 +94,19 @@ const ExerciseCard = ({ exercise }) => {
               fontSize: "14px",
               borderRadius: "20px",
               textTransform: "capitalize",
+              "&:hover": {
+                background: "#fff",
+                color: "darksalmon",
+              },
             }}
-            onClick={addToFavourites}
+            onClick={() =>
+              dispatch(
+                userApi.endpoints.toggleFav.initiate({
+                  action: "add",
+                  exId: exercise.id,
+                })
+              )
+            }
           >
             Add to Favourites
           </Button>

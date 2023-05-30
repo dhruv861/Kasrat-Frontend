@@ -3,14 +3,16 @@ import React from "react";
 // import { Link } from "react-router-dom";
 
 import { useHMSActions } from "@100mslive/react-sdk";
-
+import { useSelector } from "react-redux";
 
 const EnterRoom = ({ code }) => {
+  const user = useSelector((state) => state.userProfile.user);
+
   const hmsActions = useHMSActions();
   console.log("EnterRoom", code);
- 
+
   const enter = async () => {
-    const userName = "Dhruv";
+    const userName = user.name;
     const roomCode = code;
     console.log("inside", roomCode);
     const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode });

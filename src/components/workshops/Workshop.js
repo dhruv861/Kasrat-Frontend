@@ -4,22 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 const Workshop = ({ room }) => {
   const navigate = useNavigate();
-  const enterRoom = async (roomId) => {
-    console.log("RoomID",roomId);
+  const enterRoom = async (roomId,roomName) => {
+    console.log("RoomID",roomId,roomName);
     // const res = await fetch(
     //   `http://127.0.0.1:8000/api/workshops/room-code/host/${roomId}`
     // );
     // const data = await res.json();
     // console.log(data?.code);
 
-    return navigate(`/videoapp/${roomId}`);
+    return navigate(`/virtual-training/${roomName}/${roomId}`);
   };
 
   return (
     <div
       className={styles.card}
       key={room.id}
-      onClick={() => enterRoom(room.room_id)}
+      onClick={() => enterRoom(room.room_id,room.name)}
     >
       <div className={styles.card__header} key={room.id}>
         <img
