@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import ExercisePlanBanner from "../assets/images/exercise-plan-banner.jpg";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -10,9 +10,7 @@ import PreferenceForm from "../components/PreferenceForm";
 import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
 import { userApi } from "../store/api/userApi";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
-// import { useBeforeUnload } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const ExercisePlanGenerator = () => {
   const [open, setOpen] = React.useState(false);
@@ -23,8 +21,7 @@ const ExercisePlanGenerator = () => {
   const dispatch = useDispatch();
   const [getExercisePlan, { isLoading, isSuccess, data, error, isError }] =
     useGetExercisePlanMutation();
-  const userplan = useSelector((state) => state.userProfile.exerciseplan);
-  dispatch(userApi.endpoints.getPlan.initiate());
+ 
 
   const onUnload = (e) => {
     e.preventDefault();
@@ -36,12 +33,8 @@ const ExercisePlanGenerator = () => {
   };
 
   useEffect(() => {
-    toast("Hello World");
     window.addEventListener("beforeunload", onUnload);
 
-    if (userplan) {
-      console.log(userplan);
-    }
     if (isLoading) {
       console.log("loading.....");
     }
@@ -54,12 +47,11 @@ const ExercisePlanGenerator = () => {
     return () => {
       window.removeEventListener("beforeunload", onUnload);
     };
-  }, [userplan]);
+  }, []);
   return (
     <>
-     
-      <section id="#generate">
-        <Navbar />
+      <NewNavbar />
+      <section id="#generate" style={{marginTop:"10%"}}>
         <Box
           sx={{
             mt: { lg: "70px", xs: "30px" },
@@ -117,8 +109,8 @@ const ExercisePlanGenerator = () => {
           />
         </Box>
         <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
+          aria-labelledby="Exercise-Plan-Preference"
+          aria-describedby="Exercise Preferences"
           open={open}
           onClose={handleClose}
           closeAfterTransition

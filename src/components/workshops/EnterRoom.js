@@ -20,6 +20,7 @@ const EnterRoom = ({ code }) => {
     try {
       await hmsActions.join({ userName, authToken });
     } catch (e) {
+      
       console.error(e);
     }
   };

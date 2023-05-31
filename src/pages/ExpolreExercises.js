@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import SearchExercises from "../components/Exercise/SearchExercises";
 import Exercises from "../components/Exercise/Exercises";
 import Footer from "../components/Footer";
@@ -10,8 +10,8 @@ const ExpolreExercises = () => {
   useEffect(() => {}, [bodyPart]);
   return (
     <Box>
-      <Navbar />
-      <section id="search">
+      <NewNavbar />
+      <section id="search" style={{marginTop:"5%"}} >
       <SearchExercises bodyPart={bodyPart} setBodyPart={setBodyPart} />
       <Exercises bodyPart={bodyPart} />
       <Footer />

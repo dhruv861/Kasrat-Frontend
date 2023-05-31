@@ -37,8 +37,8 @@ const ExerciseCard = ({ exercise }) => {
             borderRadius: "20px",
             textTransform: "capitalize",
             "&:hover": {
-              background: "#fff",
-              color: "#FFA9A9",
+              background: "#FFA9A9",
+              color: "#fff",
             },
           }}
         >
@@ -53,8 +53,8 @@ const ExerciseCard = ({ exercise }) => {
             borderRadius: "20px",
             textTransform: "capitalize",
             "&:hover": {
-              background: "#fff",
-              color: "#FCC757",
+              background: "#FCC757",
+              color: "#fff",
             },
           }}
         >

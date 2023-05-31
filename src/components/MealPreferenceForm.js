@@ -10,17 +10,22 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const CUISINE = ["Asian", "Indian", "Thai", "American", "Italian", "Chinese"];
 
 const MealPreferenceForm = ({ closeModal, setPreference }) => {
-  const [gender, setGender] = useState([]);
-  const [goal, setGoal] = useState("");
-  const [diet, setDiet] = useState("");
+  const user = useSelector((state)=>state.userProfile.user)
+  const [gender, setGender] = useState(
+    user.gender == "M" ? "male" : "female"
+  );
+  const [goal, setGoal] = useState();
+  const [diet, setDiet] = useState();
   const [cuisine, setCuisine] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState(user.weight);
+  const [height, setHeight] = useState(user.height);
+  const [age, setAge] = useState(user.age);
+
 
   const handleGender = (event) => setGender(event.target.value);
   const handleGoal = (event) => setGoal(event.target.value);

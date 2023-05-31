@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import {
   Box,
   Card,
@@ -20,7 +20,7 @@ const WorkoutTracker = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Navbar />
+      <NewNavbar />
       <Box
         sx={{
           mt: { lg: "20px", xs: "10px" },

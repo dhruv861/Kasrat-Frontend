@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -14,22 +14,22 @@ import MealPlan from "../components/MealPlan";
 const MealPlanGenerator = () => {
   const [open, setOpen] = React.useState(false);
   const [preference, setPreference] = React.useState(skipToken);
-  const [plan, setPlan] = React.useState(null)
+  const [plan, setPlan] = React.useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const result = useGetMealPlanQuery(preference);
 
   useEffect(() => {
-    if(result.data){
-    console.log("MEAL PLAN", result.data?.week);
-        setPlan(result.data.week);
+    if (result.data) {
+      console.log("MEAL PLAN", result.data?.week);
+      setPlan(result.data.week);
     }
     console.log("", preference);
   }, [preference, result]);
 
   return (
     <>
-      <Navbar />
+      <NewNavbar />
       <Box
         sx={{
           mt: { lg: "70px", xs: "30px" },

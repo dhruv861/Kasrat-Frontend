@@ -105,7 +105,8 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
         },
       });
       closeModal();
-      navigate("/generate-exercise-plan/#exercise-plan");
+      navigate("/generate-exercise-plan/");
+      document.getElementById("exercise-plan").scrollIntoView()
     }
     else{
       toast.error("All the fields are required.!!!")

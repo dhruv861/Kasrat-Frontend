@@ -4,16 +4,10 @@ import { useSelector } from "react-redux";
 import { logout } from "../store/UserSlice";
 import { useDispatch } from "react-redux";
 import { userApi } from "../store/api/userApi";
-import {
-  Avatar,
-  Button,
-  Chip,
-  Popover,
-  Stack,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Avatar, Chip, Popover, Stack } from "@mui/material";
+// import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 import PlusOneIcon from "@mui/icons-material/PlusOne";
-
 
 const NewNavbar = () => {
   const user = useSelector((state) => state.userProfile.user);
@@ -42,9 +36,9 @@ const NewNavbar = () => {
         <div className="row">
           <div className="col-lg-12">
             <nav className="navbar navbar-expand-lg">
-              <a className="navbar-brand" href="index.html">
+              <Link className="navbar-brand" to="/">
                 <img src={logo} style={{ width: "250px" }} alt="Logo" />
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -65,31 +59,31 @@ const NewNavbar = () => {
               >
                 <ul className="navbar-nav me-auto">
                   <li className="nav-item">
-                    <a className="page-scroll active" href="#hero-area">
+                    <Link className="page-scroll active" to="/#hero-area">
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="page-scroll"
-                      href="#features"
+                      to="/#features"
                       aria-owns={openFeature ? "mouse-over-popover" : undefined}
                       aria-haspopup="true"
                       onMouseEnter={(e) => setFeatureEl(e.currentTarget)}
                     >
                       Features
-                    </a>
+                    </Link>
                   </li>
 
                   <li className="nav-item">
-                    <a className="page-scroll" href="#pricing">
+                    <Link smooth className="page-scroll" to="/#pricing">
                       Pricing
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="page-scroll" href="#contact">
+                    <Link className="page-scroll" to="/#contact">
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -107,7 +101,7 @@ const NewNavbar = () => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-4 col-md-6">
-                      <Link to={"/search-exercises"}>
+                      <Link to={"/search-exercises#search"}>
                         <div className="single-services">
                           <div className="service-icon">
                             <i className="lni lni-dumbbell"></i>
@@ -230,23 +224,29 @@ const NewNavbar = () => {
                   vertical: "bottom",
                   horizontal: "left",
                 }}
+                PaperProps={{
+                  style: { width: "06%" },
+                }}
               >
                 <Stack direction={"column"}>
-                  <Button
+                  <Link
+                    to={"/userDashboard"}
                     style={{
                       color: "#3A1212",
                     }}
                   >
                     Profile
-                  </Button>
-                  <Button
+                  </Link>
+                  <hr />
+                  <Link
                     style={{
                       color: "#3A1212",
                     }}
                   >
                     Change <br /> Password
-                  </Button>
-                  <Button
+                  </Link>
+                  <hr />
+                  <Link
                     onClick={() => {
                       dispatch(logout());
                       setAnchorEl(null);
@@ -256,7 +256,7 @@ const NewNavbar = () => {
                     }}
                   >
                     Log Out
-                  </Button>
+                  </Link>
                 </Stack>
               </Popover>
             </nav>

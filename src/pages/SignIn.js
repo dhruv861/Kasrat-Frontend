@@ -3,19 +3,27 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import { useLoginUserMutation } from "../store/api/authApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import { toast } from "react-hot-toast";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff6766",
+      darker: "#053e85",
+    },
+  },
+});
 
 export default function SignIn() {
   const [loginUser, { isLoading, isSuccess, data, error, isError }] =
@@ -26,26 +34,14 @@ export default function SignIn() {
 
   useEffect(() => {
     if (isSuccess) {
-      //   toast.success('User registered successfully');
-      //   navigate('/verifyemail');
-      console.log("LOGIN SUCCESFULL", data, "state", user);
+      // console.log("LOGIN SUCCESFULL", data, "state", user);
       window.localStorage.setItem("access", data.token.access);
       window.localStorage.setItem("refresh", data.token.refresh);
+      toast.success("You're Logged In Succesfully")
       navigate("/");
     }
     if (isError) {
-      console.log(error);
-      //   if (Array.isArray((error).data.error)) {
-      //     (error.data.error.forEach(el =>
-      //       toast.error(el.message, {
-      //         position: 'top-right',
-      //       })
-      //     ));
-      //   } else {
-      //     toast.error((error.data.message, {
-      //       position: 'top-right',
-      //     }));
-      //   }
+      toast.error(...error.data.errors.non_field_errors);
     }
   }, [isLoading, user]);
 
@@ -64,8 +60,12 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
-      <Container component="main" maxWidth="xs">
+      <NewNavbar />
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{ paddingTop: "4%", marginTop: "2%" }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -111,19 +111,32 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant=""
-              sx={{ mt: 3, mb: 2, backgroundColor: "#FF2625" }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: "#FF2625",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#FF2625",
+                },
+              }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link to="#">
+                  <p style={{ color: "#FF2625", fontSize: "14px" }}>
+                    Forgot password?
+                  </p>
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signin" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to={"/signup"}>
+                  <p style={{ color: "#FF2625", fontSize: "14px" }}>
+                    Dont have an account? Sign Up
+                  </p>
                 </Link>
               </Grid>
             </Grid>

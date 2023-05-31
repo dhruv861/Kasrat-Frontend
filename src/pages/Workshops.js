@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Workshop from "../components/workshops/Workshop";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import styles from "../components/workshops/card.module.css";
 import { useGetRoomsQuery } from "../store/api/workshopApi";
 
@@ -19,7 +19,7 @@ const Workshops = () => {
 
   return (
     <>
-      <Navbar />
+      <NewNavbar />
 
       <div style={{ display: "grid", placeItems: "center" }}>
         <div className={styles.container}>

@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import { useRegisterUserMutation } from "../store/api/authApi";
 import { useNavigate } from "react-router-dom";
 
@@ -36,17 +36,6 @@ export default function SignUp() {
 
     if (isError) {
       console.log(error);
-      //   if (Array.isArray((error).data.error)) {
-      //     (error.data.error.forEach(el =>
-      //       toast.error(el.message, {
-      //         position: 'top-right',
-      //       })
-      //     ));
-      //   } else {
-      //     toast.error((error.data.message, {
-      //       position: 'top-right',
-      //     }));
-      //   }
     }
   }, [isLoading]);
 
@@ -74,7 +63,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
+      <NewNavbar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

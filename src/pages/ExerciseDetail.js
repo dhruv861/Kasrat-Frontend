@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import Detail from "../components/Exercise/Detail";
-import Navbar from "../components/Navbar";
+import NewNavbar from "../components/NewNavbar";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import {
@@ -78,7 +78,7 @@ const ExerciseDetail = () => {
 
   return (
     <Box >
-      <Navbar />
+      <NewNavbar />
       {!exerciseDetailData.isSuccess &&
         !equimentExercisesData.isSuccess &&
         !targetMuscleExercisesData.isSuccess && <Loader />}
