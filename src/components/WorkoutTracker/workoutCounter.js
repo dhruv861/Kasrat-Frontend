@@ -244,7 +244,7 @@ function WorkoutCounter() {
     <div>
       <Navbar />
       <div style={styles.selectBox}>
-        <h1>Bicep Curls</h1>
+        <h1>{exercise}</h1>
         <img
           style={{ margin: "0 13%" }}
           src={imgSource}

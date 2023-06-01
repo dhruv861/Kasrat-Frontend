@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
@@ -36,7 +38,6 @@
     <link rel="stylesheet" href="../src/pages/styles/lineicons.css" />
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
-
     <!--====== Tiny Slider css ======-->
     <link rel="stylesheet" href="../src/pages/styles/tiny-slider.css" />
 
@@ -61,5 +62,15 @@
     <script src="../src/assets/js/glightbox.min.js"></script>
     <script src="../src/assets/js/main.js"></script>
     <script src="../src/assets/js/tiny-slider.js"></script>  -->
+    <script>
+      function handleCredentialResponse(response) {
+        // decodeJwtResponse() is a custom function defined by you
+        // to decode the credential response.
+        const responsePayload = response.credential;
+
+        console.log("ID: " + responsePayload);
+      }
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </body>
 </html>

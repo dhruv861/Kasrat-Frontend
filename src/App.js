@@ -3,7 +3,6 @@ import React from "react";
 import "./App.css";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
-import { Home } from "./pages/Home";
 import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import ExpolreExercises from "./pages/ExpolreExercises";
@@ -21,8 +20,6 @@ import LandingPage from "./pages/LandingPage";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  // window.localStorage.setItem("access", "");
-  // window.localStorage.setItem("refresh", "");
   return (
     <Box width="400px" sx={{ width: { xl: "1488px" } }} m="auto">
       <div>
@@ -39,17 +36,49 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/userDashboard" element={<UserDashboard />} />
+        <Route
+          path="/userDashboard"
+          element={
+            <ProtectedtRoutes>
+              <UserDashboard />
+            </ProtectedtRoutes>
+          }
+        />
         <Route
           path="/generate-exercise-plan"
-          element={<ExercisePlanGenerator />}
+          element={
+            <ProtectedtRoutes>
+              <ExercisePlanGenerator />
+            </ProtectedtRoutes>
+          }
         />
-        <Route path="/generate-meal-plan" element={<MealPlanGenerator />} />
-        <Route path="/workout" element={<WorkoutTracker />} />
-        <Route path="/track-workout/:exercise" element={<WorkoutCounter />} />
+        <Route
+          path="/generate-meal-plan"
+          element={
+            <ProtectedtRoutes>
+              <MealPlanGenerator />
+            </ProtectedtRoutes>
+          }
+        />
+        <Route
+          path="/workout"
+          element={
+            <ProtectedtRoutes>
+              <WorkoutTracker />
+            </ProtectedtRoutes>
+          }
+        />
+        <Route
+          path="/track-workout/:exercise"
+          element={
+            <ProtectedtRoutes>
+              <WorkoutCounter />
+            </ProtectedtRoutes>
+          }
+        />
         <Route
           path="/exercise/:id"
           element={

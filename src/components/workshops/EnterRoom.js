@@ -26,7 +26,7 @@ const EnterRoom = ({ code }) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <div style={{ display: "flex", justifyContent: "space-around" ,marginTop:"5%" }}>
       <Button
         onClick={enter}
         style={{

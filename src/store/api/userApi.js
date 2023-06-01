@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import { setUser, setUserFav, setExercisePlan } from "../UserSlice";
+import {
+  //  setUser,
+  setUserFav,
+  setPlan,
+} from "../UserSlice";
 
 // eslint-disable-next-line no-undef
 const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
@@ -16,25 +20,24 @@ export const userApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User"],
+  // tagTypes: ["User"],
   endpoints: (builder) => ({
     getUserDetails: builder.query({
       query() {
         return {
           url: "profile",
           credentials: "include",
-          // Authorization: `Bearer ${data.access}`
         };
       },
       providesTags: ["User"],
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setUser(data));
-        } catch (error) {
-          /* empty */
-        }
-      },
+      // async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      //   try {
+      //     const { data } = await queryFulfilled;
+      //     dispatch(setUser(data));
+      //   } catch (error) {
+      //     /* empty */
+      //   }
+      // },
     }),
     toggleFav: builder.mutation({
       query({ exId, action }) {
@@ -49,9 +52,9 @@ export const userApi = createApi({
       },
     }),
     savePlan: builder.mutation({
-      query(plan) {
+      query({ plan, plan_type }) {
         return {
-          url: "exercise-plan/save/",
+          url: `exercise-plan/save/?plan_type=${plan_type}`,
           method: "POST",
           body: { plan },
         };
@@ -60,12 +63,28 @@ export const userApi = createApi({
     getPlan: builder.query({
       query() {
         return {
-          url: "exercise-plan/save/",
+          url: `exercise-plan/save/`,
         };
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
-        dispatch(setExercisePlan(data));
+        try {
+          dispatch(setPlan(data));
+        } catch (e) {
+          console.log(e);
+        }
+      },
+    }),
+    updateProfile: builder.mutation({
+      query(data) {
+        return {
+          url: "profile/update/",
+          method: "POST",
+          body: data,
+        };
+      },
+      async onQueryStarted(args, { dispatch }) {
+        dispatch(userApi.endpoints.getUserDetails.initiate());
       },
     }),
   }),

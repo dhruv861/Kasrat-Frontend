@@ -10,6 +10,7 @@
     "@mediapipe/pose": "^0.4.1624666670",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.3",
+    "@react-oauth/google": "^0.11.0",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "react": "^18.2.0",

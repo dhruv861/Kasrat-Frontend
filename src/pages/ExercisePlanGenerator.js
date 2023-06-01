@@ -12,6 +12,7 @@ import ExercisePlan from "../components/Exercise/ExercisePlan";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
 
+
 const ExercisePlanGenerator = () => {
   const [open, setOpen] = React.useState(false);
   const [isSave, setIsSave] = React.useState(false);
@@ -161,7 +162,8 @@ const ExercisePlanGenerator = () => {
             <ExercisePlan plan={data} days={Object.keys(data)} />
             <Button
               onClick={() => {
-                dispatch(userApi.endpoints.savePlan.initiate(data));
+                dispatch(userApi.endpoints.savePlan.initiate({plan:data,plan_type:"exercise"}));
+              
                 setIsSave(true);
               }}
               style={{ marginLeft: "80%", marginBottom: "5%" }}

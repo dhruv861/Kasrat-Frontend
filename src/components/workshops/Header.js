@@ -17,6 +17,7 @@ function Header() {
         <button
           id="leave-btn"
           className="btn-danger"
+          style={{marginTop:"6%"}}
           onClick={() => hmsActions.leave()}
         >
           Leave Room

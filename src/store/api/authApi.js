@@ -31,10 +31,21 @@ export const authApi = createApi({
         try {
           await queryFulfilled;
           await dispatch(userApi.endpoints.getUserDetails.initiate(null));
-        } catch (error) { /* empty */ }
+        } catch (error) {
+          /* empty */
+        }
+      },
+    }),
+    googleAuth: builder.mutation({
+      query(credential) {
+        return {
+          url: "google/",
+          method: "POST",
+          body: { auth_token: credential },
+        };
       },
     }),
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation,useGoogleAuthMutation } = authApi;

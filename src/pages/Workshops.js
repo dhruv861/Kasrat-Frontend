@@ -21,7 +21,7 @@ const Workshops = () => {
     <>
       <NewNavbar />
 
-      <div style={{ display: "grid", placeItems: "center" }}>
+      <div style={{ display: "grid", placeItems: "center" ,marginTop:"5%" }}>
         <div className={styles.container}>
           {rooms?.map((room) => (
             <Workshop room={room} key={room.id} />

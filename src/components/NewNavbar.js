@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import logo from "../assets/images/KasratLogo2.png";
 import { useSelector } from "react-redux";
-import { logout } from "../store/UserSlice";
+import { logout, setUser } from "../store/UserSlice";
 import { useDispatch } from "react-redux";
 import { userApi } from "../store/api/userApi";
 import { Avatar, Chip, Popover, Stack } from "@mui/material";
@@ -26,7 +26,10 @@ const NewNavbar = () => {
       !user
     ) {
       // console.log("logged in", user);
-      dispatch(userApi.endpoints.getUserDetails.initiate(null));
+      dispatch(userApi.endpoints.getUserDetails.initiate(null)).then((data) => {
+        console.log("----", data);
+        dispatch(setUser(data.data));
+      });
     }
   }, [user]);
 

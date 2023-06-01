@@ -23,7 +23,7 @@ const WorkoutTracker = () => {
       <NewNavbar />
       <Box
         sx={{
-          mt: { lg: "20px", xs: "10px" },
+          mt: { lg: "12%", xs: "7%" },
           ml: { sm: "50px" },
           mr: { lg: "70px" },
         }}

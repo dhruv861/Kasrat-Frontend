@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import { toast } from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleAuthMutation } from "../store/api/authApi";
 
 const theme = createTheme({
   palette: {
@@ -28,22 +30,32 @@ const theme = createTheme({
 export default function SignIn() {
   const [loginUser, { isLoading, isSuccess, data, error, isError }] =
     useLoginUserMutation();
+  const [
+    googleLogin,
+    { isSuccess: googleAuthIsSuccess, data: googleAuthdata },
+  ] = useGoogleAuthMutation();
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (googleAuthIsSuccess) {
+      console.log(googleAuthdata);
+      window.localStorage.setItem("access", googleAuthdata.tokens.access);
+      window.localStorage.setItem("refresh", googleAuthdata.tokens.refresh);
+      navigate("/");
+    }
     if (isSuccess) {
       // console.log("LOGIN SUCCESFULL", data, "state", user);
       window.localStorage.setItem("access", data.token.access);
       window.localStorage.setItem("refresh", data.token.refresh);
-      toast.success("You're Logged In Succesfully")
+      toast.success("You're Logged In Succesfully");
       navigate("/");
     }
     if (isError) {
       toast.error(...error.data.errors.non_field_errors);
     }
-  }, [isLoading, user]);
+  }, [isLoading, user, googleAuthdata]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -124,14 +136,15 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <div style={{ textAlign: "center", fontSize: "13px" }}>or</div>
+
+            <Box style={{ padding: "0 18%", margin: "5% 0" }}>
+              <GoogleLogin
+                onSuccess={(res) => googleLogin(res.credential)}
+                onError={(err) => console.log("GOOOO", err)}
+              />
+            </Box>
             <Grid container>
-              <Grid item xs>
-                <Link to="#">
-                  <p style={{ color: "#FF2625", fontSize: "14px" }}>
-                    Forgot password?
-                  </p>
-                </Link>
-              </Grid>
               <Grid item>
                 <Link to={"/signup"}>
                   <p style={{ color: "#FF2625", fontSize: "14px" }}>

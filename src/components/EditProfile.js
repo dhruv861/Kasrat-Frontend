@@ -10,16 +10,42 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { userApi } from "../store/api/userApi";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/UserSlice";
+import { redirect } from "react-router-dom";
 
-const EditProfile = ({ userDetails }) => {
+const EditProfile = ({ userDetails, setModal }) => {
   const [gender, setGender] = useState(
     userDetails.gender == "M" ? "Male" : "Female"
   );
   const [weight, setWeight] = useState(userDetails.weight);
   const [height, setHeight] = useState(userDetails.height);
   const [age, setAge] = useState(userDetails.age);
+  const [name, setName] = useState(userDetails.name);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleEdit = () => {};
+  const handleEdit = async() => {
+    dispatch(
+      userApi.endpoints.updateProfile.initiate({
+        gender,
+        weight,
+        height,
+        age,
+        name,
+      })
+    );
+    setModal(false);
+    await dispatch(userApi.endpoints.getUserDetails.initiate()).then((data) =>
+      setUser(data.data)
+    );
+    redirect("userDashboard");
+    navigate("/userDashboard/");
+
+    // console.log("RESSS", result.data);
+  };
 
   return (
     <div>
@@ -29,7 +55,8 @@ const EditProfile = ({ userDetails }) => {
         label="Name"
         name="name"
         autoComplete="name"
-        value={userDetails.name}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       ></TextField>
       <TextField
         sx={{ m: 1, width: 250 }}

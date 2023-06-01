@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/styles/glightbox.min.css";
 import "../assets/styles/lineicons.css";
 import "../assets/styles/tiny-slider.css";
 import "../assets/styles/style.css";
-import landingBanner from "../assets/images/banner.jpg";
+import landingBanner from "../assets/images/banner.png";
 import aboutBanner from "../assets/images/8225.jpg";
 import PlusOneIcon from "@mui/icons-material/PlusOne";
 import NewNavbar from "../components/NewNavbar";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const LandingPage = () => {
+  const [query, setQuery] = useState({});
+  const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
+
+  const handleQueries = async (e) => {
+    e.preventDefault();
+    const res = await fetch(`${BASE_URL}/queries/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(query),
+    });
+    const data = await res.json();
+    if(res.ok) {
+      toast.success(data)
+    }
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery({ ...query, [e.target.name]: value });
+  };
   return (
     <>
       <NewNavbar />
@@ -274,19 +297,19 @@ const LandingPage = () => {
             </div>
             <div className="col-lg-4 col-md-6">
               <Link>
-              <div className="single-services">
-                <div className="service-icon">
-                  <i className="lni lni-youtube"></i>
+                <div className="single-services">
+                  <div className="service-icon">
+                    <i className="lni lni-youtube"></i>
+                  </div>
+                  <div className="service-content">
+                    <h4>YouTube Video Suggestions</h4>
+                    <p>
+                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
+                      nonumy eirmod tempor ividunt labor dolore magna.
+                    </p>
+                  </div>
                 </div>
-                <div className="service-content">
-                  <h4>YouTube Video Suggestions</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, adipscing elitr, sed diam nonumy
-                    eirmod tempor ividunt labor dolore magna.
-                  </p>
-                </div>
-              </div>
-            </Link>
+              </Link>
             </div>
           </div>
         </div>
@@ -335,10 +358,7 @@ const LandingPage = () => {
                 </div>
 
                 <div className="light-rounded-buttons">
-                  <a
-                    href=""
-                    className="btn primary-btn-outline"
-                  >
+                  <a href="" className="btn primary-btn-outline">
                     Start free trial
                   </a>
                 </div>
@@ -493,6 +513,7 @@ const LandingPage = () => {
                         id="name"
                         placeholder="Name"
                         required
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="col-md-6">
@@ -502,6 +523,7 @@ const LandingPage = () => {
                         id="email"
                         placeholder="Email"
                         required
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -513,6 +535,7 @@ const LandingPage = () => {
                         id="phone"
                         placeholder="Phone"
                         required
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="col-md-6">
@@ -522,6 +545,7 @@ const LandingPage = () => {
                         id="email"
                         placeholder="Subject"
                         required
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -532,6 +556,7 @@ const LandingPage = () => {
                         id="message"
                         placeholder="Type Message"
                         rows="5"
+                        onChange={handleChange}
                       ></textarea>
                     </div>
                   </div>
@@ -541,6 +566,7 @@ const LandingPage = () => {
                         <button
                           type="submit"
                           className="btn primary-btn rounded-full"
+                          onClick={handleQueries}
                         >
                           Send Message
                         </button>
