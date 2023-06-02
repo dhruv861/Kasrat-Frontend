@@ -20,6 +20,7 @@ export default function VideoApp() {
   const fetchRoomCode = useGetRoomCodeByRoleQuery({ role: "guest", roomId });
 
   useEffect(() => {
+    console.log(roomId)
     if (fetchRoomCode.isSuccess) {
       console.log(fetchRoomCode.data.code);
       setRoomCode(fetchRoomCode.data.code);

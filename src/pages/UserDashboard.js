@@ -8,15 +8,15 @@ import PersonalInformation from "../components/PersonalInformation";
 const UserDashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userProfile);
-
+  
+  dispatch(userApi.endpoints.getPlan.initiate())
+  try {
+  } catch (e) {
+    console.log(e);
+  }
   useEffect(() => {
-    try {
-      dispatch(userApi.endpoints.getPlan.initiate());
-    } catch (e) {
-      console.log(e);
-    }
     console.log(user);
-  }, [user,user.user]);
+  }, [user,user.user,user.plan]);
 
   return (
     <>

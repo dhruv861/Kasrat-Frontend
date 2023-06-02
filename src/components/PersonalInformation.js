@@ -13,7 +13,6 @@ const PersonalInformation = ({user}) => {
  
   return (
     <>
-    
         <Typography
           sx={{ fontSize: { lg: "44px", xs: "25px" }, ml: "20px" }}
           fontWeight={700}

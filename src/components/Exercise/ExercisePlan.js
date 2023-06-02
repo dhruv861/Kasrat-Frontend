@@ -44,7 +44,7 @@ function a11yProps(index) {
 
 export default function ExercisePlan({ plan, days }) {
 
-  console.log(plan)
+  // console.log(plan)
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const tabPanelStyle = {

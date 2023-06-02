@@ -3,6 +3,7 @@ import {
   //  setUser,
   setUserFav,
   setPlan,
+  setUser
 } from "../UserSlice";
 
 // eslint-disable-next-line no-undef
@@ -10,6 +11,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
 
 export const userApi = createApi({
   reducerPath: "userApi",
+  keepUnusedDataFor: 3,
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/accounts/`,
     prepareHeaders: (headers) => {
@@ -29,15 +31,15 @@ export const userApi = createApi({
           credentials: "include",
         };
       },
-      providesTags: ["User"],
-      // async onQueryStarted(args, { dispatch, queryFulfilled }) {
-      //   try {
-      //     const { data } = await queryFulfilled;
-      //     dispatch(setUser(data));
-      //   } catch (error) {
-      //     /* empty */
-      //   }
-      // },
+      // providesTags: ["User"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setUser(data));
+        } catch (error) {
+          /* empty */
+        }
+      },
     }),
     toggleFav: builder.mutation({
       query({ exId, action }) {
@@ -59,6 +61,11 @@ export const userApi = createApi({
           body: { plan },
         };
       },
+      async onQueryStarted(args,{dispatch,queryFulfilled}){
+        await queryFulfilled
+        console.log("fullfiled")
+        dispatch(userApi.endpoints.getPlan.initiate())
+      }
     }),
     getPlan: builder.query({
       query() {
@@ -83,7 +90,8 @@ export const userApi = createApi({
           body: data,
         };
       },
-      async onQueryStarted(args, { dispatch }) {
+      async onQueryStarted(args, { dispatch ,queryFulfilled}) {
+        const { data } = await queryFulfilled;
         dispatch(userApi.endpoints.getUserDetails.initiate());
       },
     }),

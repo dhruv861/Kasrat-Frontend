@@ -6,7 +6,7 @@ import Loader from './Loader';
 
 const UserDashboardDetails = ({favourites,exerciseplan}) => {
 
-    console.log(favourites,exerciseplan)
+    // console.log(favourites,exerciseplan)
   return (
     <>
       <Box sx={{ mt: { lg: "100px", xs: "0px" } }}>

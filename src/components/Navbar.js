@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Stack, Chip, Avatar, Popover } from "@mui/material";
-import Logo from "../assets/images/Logo.png";
+import Logo from "../assets/images/logo.png";
 import { useSelector } from "react-redux";
 import { logout } from "../store/UserSlice";
 import { useDispatch } from "react-redux";

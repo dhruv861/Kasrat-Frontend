@@ -13,8 +13,8 @@ import React, { useState } from "react";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../store/UserSlice";
-import { redirect } from "react-router-dom";
+// import { setUser } from "../store/UserSlice";
+// import { redirect } from "react-router-dom";
 
 const EditProfile = ({ userDetails, setModal }) => {
   const [gender, setGender] = useState(
@@ -28,7 +28,7 @@ const EditProfile = ({ userDetails, setModal }) => {
   const navigate = useNavigate();
 
   const handleEdit = async() => {
-    dispatch(
+   await dispatch(
       userApi.endpoints.updateProfile.initiate({
         gender,
         weight,
@@ -36,13 +36,15 @@ const EditProfile = ({ userDetails, setModal }) => {
         age,
         name,
       })
-    );
-    setModal(false);
-    await dispatch(userApi.endpoints.getUserDetails.initiate()).then((data) =>
-      setUser(data.data)
-    );
-    redirect("userDashboard");
+      )
+      .then(()=>dispatch(userApi.endpoints.getUserDetails.initiate()))
+    // dispatch(userApi.endpoints.getUserDetails.initiate())
+    // .then((data) =>
+    //   setUser(data.data)
+    // );
+    // redirect("userDashboard");
     navigate("/userDashboard/");
+    setModal(false);
 
     // console.log("RESSS", result.data);
   };

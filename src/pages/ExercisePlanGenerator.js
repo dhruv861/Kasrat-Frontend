@@ -11,6 +11,7 @@ import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 
 const ExercisePlanGenerator = () => {
@@ -163,8 +164,8 @@ const ExercisePlanGenerator = () => {
             <Button
               onClick={() => {
                 dispatch(userApi.endpoints.savePlan.initiate({plan:data,plan_type:"exercise"}));
-              
                 setIsSave(true);
+                toast.success("Exercise Plan Saved")
               }}
               style={{ marginLeft: "80%", marginBottom: "5%" }}
             >

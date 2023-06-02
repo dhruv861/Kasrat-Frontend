@@ -4,7 +4,7 @@ import {
   useHMSStore,
 } from "@100mslive/react-sdk";
 import React from "react";
-import Logo from "../../assets/images/Logo.png";
+import Logo from "../../assets/images/logo.svg";
 
 function Header() {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
