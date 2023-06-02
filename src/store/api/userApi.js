@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 import {
-  //  setUser,
   setUserFav,
   setPlan,
+  setUser,
 } from "../UserSlice";
 
 // eslint-disable-next-line no-undef
@@ -30,14 +30,14 @@ export const userApi = createApi({
         };
       },
       providesTags: ["User"],
-      // async onQueryStarted(args, { dispatch, queryFulfilled }) {
-      //   try {
-      //     const { data } = await queryFulfilled;
-      //     dispatch(setUser(data));
-      //   } catch (error) {
-      //     /* empty */
-      //   }
-      // },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setUser(data));
+        } catch (error) {
+          /* empty */
+        }
+      },
     }),
     toggleFav: builder.mutation({
       query({ exId, action }) {
@@ -58,6 +58,11 @@ export const userApi = createApi({
           method: "POST",
           body: { plan },
         };
+      },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        console.log("fullfiled");
+        dispatch(userApi.endpoints.getPlan.initiate());
       },
     }),
     getPlan: builder.query({

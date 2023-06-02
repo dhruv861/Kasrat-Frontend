@@ -11,22 +11,24 @@ const UserDashboard = () => {
 
   useEffect(() => {
     try {
-      dispatch(userApi.endpoints.getPlan.initiate());
+      const result = dispatch(userApi.endpoints.getPlan.initiate());
+      result.unsubscribe()
     } catch (e) {
       console.log(e);
     }
     console.log(user);
-  }, [user,user.user]);
+  }, [user,user.user,user.plan]);
 
   return (
     <>
       <NewNavbar />
       <div className={styles["dash-container"]}>
         <PersonalInformation user={user} />
-        {user.user?.favourites && user.plan && (
+        {user.user?.favourites.length>0 && user.plan && (
           <UserDashboardDetails
             favourites={user?.user?.favourites}
             exerciseplan={user?.plan.exercise}
+            mealplan = {user?.plan.meal}
           />
         )}
       </div>

@@ -11,7 +11,7 @@ const MealCard = ({ meal }) => {
     },[info])
   return (
     <div className="exercise-card">
-      <Link to={info.data?.spoonacularSourceUrl}>
+      <Link to={info.data?.spoonacularSourceUrl} target="_blank">
         <img src={info.data?.image} alt={meal.title} loading="lazy" />
         <Typography
           ml="21px"

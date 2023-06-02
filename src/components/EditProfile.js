@@ -13,17 +13,18 @@ import React, { useState } from "react";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../store/UserSlice";
-import { redirect } from "react-router-dom";
+// import { setUser } from "../store/UserSlice";
+// import { redirect } from "react-router-dom";
 
 const EditProfile = ({ userDetails, setModal }) => {
   const [gender, setGender] = useState(
     userDetails.gender == "M" ? "Male" : "Female"
   );
-  const [weight, setWeight] = useState(userDetails.weight);
-  const [height, setHeight] = useState(userDetails.height);
-  const [age, setAge] = useState(userDetails.age);
-  const [name, setName] = useState(userDetails.name);
+  const [weight, setWeight] = useState(userDetails?.weight);
+  const [height, setHeight] = useState(userDetails?.height);
+  const [age, setAge] = useState(userDetails?.age);
+  const [name, setName] = useState(userDetails?.name);
+  const[city, setCity] = useState(userDetails?.City);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,14 +36,15 @@ const EditProfile = ({ userDetails, setModal }) => {
         height,
         age,
         name,
+        city
       })
-    );
-    setModal(false);
-    await dispatch(userApi.endpoints.getUserDetails.initiate()).then((data) =>
-      setUser(data.data)
-    );
-    redirect("userDashboard");
+    ).then(() => dispatch(userApi.endpoints.getUserDetails.initiate()));
+    // await dispatch(userApi.endpoints.getUserDetails.initiate()).then((data) =>
+    // setUser(data.data)
+    // );
+    // redirect("userDashboard");
     navigate("/userDashboard/");
+    setModal(false);
 
     // console.log("RESSS", result.data);
   };
@@ -67,6 +69,15 @@ const EditProfile = ({ userDetails, setModal }) => {
           readOnly: true,
         }}
       />
+      <TextField
+        sx={{ m: 1, width: 250 }}
+        id="city"
+        label="city"
+        name="city"
+        autoComplete="city"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      ></TextField>
       <FormControl sx={{ m: 1, width: 250 }}>
         <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
         <Select

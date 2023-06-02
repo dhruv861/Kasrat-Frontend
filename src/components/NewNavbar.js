@@ -30,6 +30,7 @@ const NewNavbar = () => {
         console.log("----", data);
         dispatch(setUser(data.data));
       });
+      dispatch(userApi.endpoints.getPlan.initiate(null))
     }
   }, [user]);
 
@@ -78,11 +79,6 @@ const NewNavbar = () => {
                     </Link>
                   </li>
 
-                  <li className="nav-item">
-                    <Link smooth className="page-scroll" to="/#pricing">
-                      Pricing
-                    </Link>
-                  </li>
                   <li className="nav-item">
                     <Link className="page-scroll" to="/#contact">
                       Contact
@@ -228,7 +224,7 @@ const NewNavbar = () => {
                   horizontal: "left",
                 }}
                 PaperProps={{
-                  style: { width: "06%" },
+                  style: { width: "08%",textAlign:"center" },
                 }}
               >
                 <Stack direction={"column"}>

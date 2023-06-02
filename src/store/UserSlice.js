@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userApi } from "./api/userApi";
+
 
 const initialState = {
   user: null,
@@ -13,6 +15,8 @@ export const UserSlice = createSlice({
       state.user = null;
       window.localStorage.removeItem("access");
       window.localStorage.removeItem("refresh");
+      const result=userApi.endpoints.getUserDetails.initiate()
+      result.unsubscribe()
     },
     setUser: (state, action) => {
       state.user = action.payload;

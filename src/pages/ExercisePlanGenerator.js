@@ -11,6 +11,7 @@ import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 
 const ExercisePlanGenerator = () => {
@@ -52,7 +53,7 @@ const ExercisePlanGenerator = () => {
   return (
     <>
       <NewNavbar />
-      <section id="#generate" style={{marginTop:"10%"}}>
+      <section id="#generate" style={{ marginTop: "10%" }}>
         <Box
           sx={{
             mt: { lg: "70px", xs: "30px" },
@@ -161,12 +162,32 @@ const ExercisePlanGenerator = () => {
           <>
             <ExercisePlan plan={data} days={Object.keys(data)} />
             <Button
+              style={{
+                marginTop: "45px",
+                textDecoration: "none",
+                width: "200px",
+                textAlign: "center",
+                background: "#FF2625",
+                padding: "14px",
+                fontSize: "22px",
+                textTransform: "none",
+                color: "white",
+                borderRadius: "4px",
+                justifySelf: "self-end",
+                marginLeft: "80%",
+                marginBottom: "5%",
+              }}
               onClick={() => {
-                dispatch(userApi.endpoints.savePlan.initiate({plan:data,plan_type:"exercise"}));
-              
+                dispatch(
+                  userApi.endpoints.savePlan.initiate({
+                    plan: data,
+                    plan_type: "exercise",
+                  })
+                );
+                  toast.success("Exercise Plan Saved")
                 setIsSave(true);
               }}
-              style={{ marginLeft: "80%", marginBottom: "5%" }}
+              
             >
               Save The Plan
             </Button>

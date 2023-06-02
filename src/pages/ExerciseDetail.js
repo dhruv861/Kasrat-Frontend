@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import Detail from "../components/Exercise/Detail";
 import NewNavbar from "../components/NewNavbar";
-import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import {
   useFilterExerciseByTargetQuery,
@@ -15,12 +14,15 @@ import ExerciseVideos from "../components/Exercise/ExerciseVideos";
 import SimilarExercises from "../components/Exercise/SimilarExercises";
 
 const ExerciseDetail = () => {
+  console.log(
+    typeof process.env.REACT_APP_RAPIDAPI_KEY,"-----",
+    typeof process.env.REACT_APP_RAPIDAPI_HOST
+  );
   const [exerciseDetail, setExerciseDetail] = useState({});
   const [exerciseVideos, setExerciseVideos] = useState([]);
   const { id } = useParams();
 
   const exerciseDetailData = useGetExerciseByIdQuery(id);
-  // console.log(exerciseDetailData.data);
 
   const targetMuscleExercisesData = useFilterExerciseByTargetQuery(
     exerciseDetailData.data?.target
@@ -35,8 +37,8 @@ const ExerciseDetail = () => {
   const youtubeOptions = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "269707a94fmsh590cf482efce22fp16cd02jsn829a8cac3e28",
-      "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
+      "X-RapidAPI-Key":process.env.REACT_APP_RAPIDAPI_KEY,
+      "X-RapidAPI-Host":process.env.REACT_APP_RAPIDAPI_HOST,
     },
   };
 
@@ -77,29 +79,37 @@ const ExerciseDetail = () => {
   }
 
   return (
-    <Box >
+    <>
       <NewNavbar />
-      {!exerciseDetailData.isSuccess &&
-        !equimentExercisesData.isSuccess &&
-        !targetMuscleExercisesData.isSuccess && <Loader />}
+      <Box style={{marginTop:"5.5%"}}>
+        {/* {exerciseDetailData.isLoading &&
+        equimentExercisesData.isLoading &&
+      targetMuscleExercisesData.isLoading && <Loader />} */}
 
-      {exerciseDetailData.isSuccess &&
-        targetMuscleExercisesData.isSuccess &&
-        equimentExercisesData.isSuccess && (
-          <>
-            <Detail exerciseDetail={exerciseDetail} />
-            <ExerciseVideos
-              exerciseVideos={exerciseVideos}
-              name={exerciseDetail.name}
-            />
+        {exerciseDetailData.isSuccess ? (
+          <Detail exerciseDetail={exerciseDetail} />
+        ) : (
+          <Loader />
+        )}
+        {exerciseVideos ? (
+          <ExerciseVideos
+            exerciseVideos={exerciseVideos}
+            name={exerciseDetail.name}
+          />
+        ) : (
+          <Loader />
+        )}
+
+        {targetMuscleExercisesData.isSuccess &&
+          equimentExercisesData.isSuccess && (
             <SimilarExercises
               targetMuscleExercises={targetMuscleExercisesData.data}
               equipmentExercises={equimentExercisesData.data}
             />
-          </>
-        )}
-      <Footer />
-    </Box>
+          )}
+        
+      </Box>
+    </>
   );
 };
 

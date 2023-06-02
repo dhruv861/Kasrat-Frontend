@@ -11,6 +11,10 @@ import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 import MealPreferenceForm from "../components/MealPreferenceForm";
 import MealPlan from "../components/MealPlan";
+import { toast } from "react-hot-toast";
+import { userApi } from "../store/api/userApi";
+import { useDispatch } from "react-redux";
+
 const MealPlanGenerator = () => {
   const [open, setOpen] = React.useState(false);
   const [preference, setPreference] = React.useState(skipToken);
@@ -18,6 +22,7 @@ const MealPlanGenerator = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const result = useGetMealPlanQuery(preference);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (result.data) {
@@ -132,7 +137,39 @@ const MealPlanGenerator = () => {
           </div>
         </Fade>
       </Modal>
-      {plan && <MealPlan plan={plan} />}
+      {plan && (
+        <>
+          <MealPlan plan={plan} />
+          <Button
+            style={{
+              marginTop: "45px",
+              textDecoration: "none",
+              width: "200px",
+              textAlign: "center",
+              background: "#FF2625",
+              padding: "14px",
+              fontSize: "22px",
+              textTransform: "none",
+              color: "white",
+              borderRadius: "4px",
+              justifySelf: "self-end",
+              marginLeft: "80%",
+              marginBottom: "5%",
+            }}
+            onClick={() => {
+              dispatch(
+                userApi.endpoints.savePlan.initiate({
+                  plan: plan,
+                  plan_type: "meal",
+                })
+              );
+              toast.success("Meal Plan Saved");
+            }}
+          >
+            Save The Plan
+          </Button>
+        </>
+      )}
     </>
   );
 };

@@ -3,14 +3,13 @@ import { Pose } from "@mediapipe/pose";
 import * as cam from "@mediapipe/camera_utils";
 import Webcam from "react-webcam";
 import { useRef, useEffect } from "react";
-// import { Button } from "@material-ui/core";
 import bicepcurls from "../../assets/images/bicepcurls.png";
 import crunches from "../../assets/images/crunches.png";
 import pushups from "../../assets/images/pushup.png";
 import squats from "../../assets/images/squats.png";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
-import Navbar from "../Navbar";
+import NewNavbar from "../NewNavbar";
 
 const styles = {
   webcam: {
@@ -242,7 +241,7 @@ function WorkoutCounter() {
 
   return (
     <div>
-      <Navbar />
+      <NewNavbar />
       <div style={styles.selectBox}>
         <h1>{exercise}</h1>
         <img

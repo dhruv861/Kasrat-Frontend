@@ -13,9 +13,9 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
         color="#000"
         mb="33px"
       >
-        Similar
+        Similar&nbsp;
         <span style={{ color: "#FF2625", textTransform: "capitalize" }}>
-          Target Muscle
+          Target Muscle&nbsp;
         </span>
         exercises
       </Typography>
@@ -40,11 +40,11 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
         color="#000"
         mb="33px"
       >
-        Similar
+        Similar&nbsp;
         <span style={{ color: "#FF2625", textTransform: "capitalize" }}>
-          Equipment
+          Equipment&nbsp;
         </span>
-        exercises
+        exercises&nbsp;
       </Typography>
       <Box sx={{ p: 2, position: "relative" }}>
         {equipmentExercises.length !== 0 ? (

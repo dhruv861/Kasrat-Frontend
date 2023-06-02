@@ -1,12 +1,12 @@
-import { Box, Typography } from '@mui/material';
-import React from 'react'
+import { Box, Typography } from "@mui/material";
+import React from "react";
 import HorizontalScrollBarNew from "./Exercise/HorizontalScrollBarNew";
-import ExercisePlan from "./Exercise/ExercisePlan"
-import Loader from './Loader';
+import ExercisePlan from "./Exercise/ExercisePlan";
+import Loader from "./Loader";
+import MealPlan from "./MealPlan";
 
-const UserDashboardDetails = ({favourites,exerciseplan}) => {
-
-    console.log(favourites,exerciseplan)
+const UserDashboardDetails = ({ favourites, exerciseplan, mealplan }) => {
+  console.log(favourites, exerciseplan);
   return (
     <>
       <Box sx={{ mt: { lg: "100px", xs: "0px" } }}>
@@ -33,12 +33,13 @@ const UserDashboardDetails = ({favourites,exerciseplan}) => {
           )}
         </Box>
       </Box>
-      <ExercisePlan
-        plan={exerciseplan}
-        days={Object.keys(exerciseplan)}
-      />
+      {exerciseplan && (
+        <ExercisePlan plan={exerciseplan} days={Object.keys(exerciseplan)} />
+      )}
+
+      {mealplan && <MealPlan plan={mealplan} />}
     </>
   );
-}
+};
 
-export default UserDashboardDetails
+export default UserDashboardDetails;

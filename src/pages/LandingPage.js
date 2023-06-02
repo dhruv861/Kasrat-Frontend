@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 
 const LandingPage = () => {
   const [query, setQuery] = useState({});
+  // eslint-disable-next-line no-undef
   const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
 
   const handleQueries = async (e) => {
@@ -24,13 +25,13 @@ const LandingPage = () => {
       body: JSON.stringify(query),
     });
     const data = await res.json();
-    if(res.ok) {
-      toast.success(data)
+    if (res.ok) {
+      toast.success(data);
     }
   };
 
   const handleChange = (e) => {
-    const value = e.target.value;
+    const { value } = e.target;
     setQuery({ ...query, [e.target.name]: value });
   };
   return (
@@ -55,7 +56,7 @@ const LandingPage = () => {
                   Your Personalized Workout and Nutrition Companion
                 </p>
                 <div className="button">
-                  <a className="btn primary-btn">Get Started</a>
+                  <Link to={"/search-exercises"} className="btn primary-btn">Get Started</Link>
                 </div>
               </div>
             </div>
@@ -224,8 +225,8 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>Extensive Exercise Library</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Find the exercise that best suits you, from our exercise
+                      Library.
                     </p>
                   </div>
                 </div>
@@ -240,8 +241,8 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>Personalized Workout Plans</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Create your personalized exercise plan with the Exercise
+                      Plan Generator. 
                     </p>
                   </div>
                 </div>
@@ -256,8 +257,9 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>Meal Planning and Nutrition Support</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Unlock precise meal planning with our innovative platform.
+                      Using the BMR Calculator, we create personalized week-long
+                      meal plans based on your exact calorie needs.
                     </p>
                   </div>
                 </div>
@@ -272,8 +274,9 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>Innovative Rep Counter</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Harnessing the power of cutting-edge pose detection
+                      technology, our platform helps you master your exercise
+                      form and maximize your gains.
                     </p>
                   </div>
                 </div>
@@ -288,8 +291,9 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>Online Video Training Sessions</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Provide individuals with the opportunity to engage in
+                      guided exercise programs from the comfort of their own
+                      homes.
                     </p>
                   </div>
                 </div>
@@ -304,8 +308,8 @@ const LandingPage = () => {
                   <div className="service-content">
                     <h4>YouTube Video Suggestions</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, adipscing elitr, sed diam
-                      nonumy eirmod tempor ividunt labor dolore magna.
+                      Get Youtube Video Suggestions based on your Selected
+                      Exercise
                     </p>
                   </div>
                 </div>
@@ -314,179 +318,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-      {/* <!-- ===== service-area end ===== --> */}
-
-      {/* <!-- Start Pricing  Area --> */}
-      <section id="pricing" className="pricing-area pricing-fourteen">
-        {/* <!--======  Start Section Title Five ======--> */}
-        <div className="section-title-five">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="content">
-                  <h6>Pricing</h6>
-                  <h2 className="fw-bold">Pricing & Plans</h2>
-                  <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form.
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* <!-- row --> */}
-          </div>
-          {/* <!-- container --> */}
-        </div>
-        {/* <!--======  End Section Title Five ======--> */}
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 col-md-6 col-12">
-              <div className="pricing-style-fourteen">
-                <div className="table-head">
-                  <h6 className="title">Starter</h6>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    industry.
-                  </p>
-                  <div className="price">
-                    <h2 className="amount">
-                      <span className="currency">$</span>0
-                      <span className="duration">/mo </span>
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="light-rounded-buttons">
-                  <a href="" className="btn primary-btn-outline">
-                    Start free trial
-                  </a>
-                </div>
-
-                <div className="table-content">
-                  <ul className="table-list">
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Cras justo
-                      odio.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Dapibus ac
-                      facilisis in.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle deactive"></i>{" "}
-                      Morbi leo risus.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle deactive"></i>{" "}
-                      Excepteur sint occaecat velit.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-12">
-              <div className="pricing-style-fourteen middle">
-                <div className="table-head">
-                  <h6 className="title">Exclusive</h6>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    industry.
-                  </p>
-                  <div className="price">
-                    <h2 className="amount">
-                      <span className="currency">$</span>99
-                      <span className="duration">/mo </span>
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="light-rounded-buttons">
-                  <a className="btn primary-btn">Start free trial</a>
-                </div>
-
-                <div className="table-content">
-                  <ul className="table-list">
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Cras justo
-                      odio.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Dapibus ac
-                      facilisis in.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Morbi leo
-                      risus.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle deactive"></i>{" "}
-                      Excepteur sint occaecat velit.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-12">
-              <div className="pricing-style-fourteen">
-                <div className="table-head">
-                  <h6 className="title">Premium</h6>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    industry.
-                  </p>
-                  <div className="price">
-                    <h2 className="amount">
-                      <span className="currency">$</span>150
-                      <span className="duration">/mo </span>
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="light-rounded-buttons">
-                  <a className="btn primary-btn-outline">Start free trial</a>
-                </div>
-
-                <div className="table-content">
-                  <ul className="table-list">
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Cras justo
-                      odio.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Dapibus ac
-                      facilisis in.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Morbi leo
-                      risus.
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="lni lni-checkmark-circle"></i> Excepteur
-                      sint occaecat velit.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* <!--/ End Pricing  Area --> */}
-
-      {/* <!-- Start Latest News Area --> */}
 
       <section id="contact" className="contact-section">
         <div className="container">

@@ -66,8 +66,16 @@ export default function MealPlan({ plan }) {
 
   return (
     <Box sx={{ bgcolor: "background.paper", margin: "0 35px" }}>
-      <Typography style={{ textAlign: "center", margin: "10px" }} variant="h4">
-        Meal Plan
+      <Typography
+        sx={{ fontSize: { lg: "44px", xs: "25px" }, ml: "20px" }}
+        fontWeight={700}
+        color="#000"
+        mb="33px"
+      >
+        Meal
+        <span style={{ color: "#FF2625", textTransform: "capitalize" }}>
+          Plan
+        </span>
       </Typography>
       <AppBar
         style={{ backgroundColor: "rgb(0 0 0 / 5%)", color: "black" }}

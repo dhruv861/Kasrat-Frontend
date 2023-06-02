@@ -13,31 +13,34 @@ const Exercises = ({ bodyPart }) => {
   const [exercisesPerPage] = useState(6);
   const exercises = useSelector((state) => state.exercise.exercises);
   const dispatch = useDispatch();
+  
+ if (document.getElementById("exercises")){
+  document.getElementById("exercises").scrollIntoView(true,{behaviour:"smooth"})
+ }
+   useEffect(() => {
+     const fetchExercisesData = async () => {
+       let exercisesData = [];
 
-  useEffect(() => {
-    const fetchExercisesData = async () => {
-      let exercisesData = [];
+       if (bodyPart === "all") {
+         // console.log("inside all");
+         const res = await fetch(`${BASE_URL}/exercises/`);
+         exercisesData = await res.json();
+       } else if (bodyPart) {
+         console.log("inside else");
+         const res = await fetch(
+           `${BASE_URL}/exercises/filter/?bodyPart=${bodyPart}`
+         );
+         exercisesData = await res.json();
+       } else {
+         exercisesData = [];
+       }
+       console.log("excersises", exercisesData);
 
-      if (bodyPart === "all") {
-        // console.log("inside all");
-        const res = await fetch(`${BASE_URL}/exercises/`);
-        exercisesData = await res.json();
-      } else if (bodyPart) {
-        console.log("inside else");
-        const res = await fetch(
-          `${BASE_URL}/exercises/filter/?bodyPart=${bodyPart}`
-        );
-        exercisesData = await res.json();
-      } else {
-        exercisesData = [];
-      }
-      console.log("excersises", exercisesData);
+       dispatch(setExercises(exercisesData));
+     };
 
-      dispatch(setExercises(exercisesData));
-    };
-
-    fetchExercisesData();
-  }, [bodyPart]);
+     fetchExercisesData();
+   }, [bodyPart]);
 
   // Pagination
   const indexOfLastExercise = currentPage * exercisesPerPage;
@@ -57,7 +60,7 @@ const Exercises = ({ bodyPart }) => {
   };
 
   if (exercises.length === 0) {
-    return 
+    return;
   }
 
   if (!currentExercises.length) {
