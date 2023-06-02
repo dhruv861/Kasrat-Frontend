@@ -232,19 +232,13 @@ const NewNavbar = () => {
                     to={"/userDashboard"}
                     style={{
                       color: "#3A1212",
+                      padding:"5%"
                     }}
                   >
                     Profile
                   </Link>
-                  <hr />
-                  <Link
-                    style={{
-                      color: "#3A1212",
-                    }}
-                  >
-                    Change <br /> Password
-                  </Link>
-                  <hr />
+                  
+                  {/* <hr /> */}
                   <Link
                     onClick={() => {
                       dispatch(logout());
@@ -252,6 +246,7 @@ const NewNavbar = () => {
                     }}
                     style={{
                       color: "#3A1212",
+                      padding:"5%"
                     }}
                   >
                     Log Out

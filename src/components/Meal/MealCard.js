@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Stack, Typography } from "@mui/material";
-import { useGetRecipeInformationQuery } from "../store/api/mealPlanApi";
+import { useGetRecipeInformationQuery } from "../../store/api/mealPlanApi";
 
 const MealCard = ({ meal }) => {
-    const info = useGetRecipeInformationQuery(meal.id)    
-    console.log(meal);
-    useEffect(() => {
-        console.log(info.data);
-    },[info])
+  const info = useGetRecipeInformationQuery(meal.id);
+  console.log(meal);
+  useEffect(() => {
+    console.log(info.data);
+  }, [info]);
   return (
     <div className="exercise-card">
       <Link to={info.data?.spoonacularSourceUrl} target="_blank">

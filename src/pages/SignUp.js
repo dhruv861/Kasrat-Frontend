@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import Footer from "../components/Footer";
 import NewNavbar from "../components/NewNavbar";
 import {
   useGoogleAuthMutation,
@@ -201,9 +200,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
-      {/* <Footer /> */}
     </ThemeProvider>
   );
 }

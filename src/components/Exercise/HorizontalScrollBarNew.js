@@ -3,24 +3,14 @@ import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 
 import { LeftArrow, RightArrow } from "./Arrow";
-// import { Card } from "./card";
+
 import ExerciseCard from "./ExerciseCard";
-// import { Footer } from "./footer";
-// import { Header } from "./header";
+
 import "./globalStyles.css";
 import usePreventBodyScroll from "./usePreventBodyScroll";
 import BodyPart from "./BodyPart";
-// NOTE: for hide scrollbar
+
 import "./hideScrollbar.css";
-// import "./firstItemMargin.css";
-
-// const elemPrefix = "test";
-// const getId = (index) => `${elemPrefix}${index}`;
-
-// const getItems = () =>
-//   Array(20)
-//     .fill(0)
-//     .map((_, ind) => ({ id: getId(ind) }));
 
 const Arrows = () => (
   <div

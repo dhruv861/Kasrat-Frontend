@@ -1,16 +1,14 @@
-import React from 'react'
-import styles from "../assets/styles/dashboard.module.css";
-import userImg from "../assets/images/user.jpg";
+import React from "react";
+import styles from "../../assets/styles/dashboard.module.css";
+import userImg from "../../assets/images/user.jpg";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
-import EditProfile from "../components/EditProfile";
+import EditProfile from "./EditProfile";
 import { Box, Fade, Typography } from "@mui/material";
 
+const PersonalInformation = ({ user }) => {
+  const [open, setOpen] = React.useState(false);
 
-const PersonalInformation = ({user}) => {
-  
-  const [open, setOpen] = React.useState(false)
- 
   return (
     <>
       <Typography
@@ -47,8 +45,8 @@ const PersonalInformation = ({user}) => {
             marginLeft: "27%",
             marginTop: "2%",
             background: "#FF2625",
-            color:"white",
-            borderRadius:"15px 15px"
+            color: "white",
+            borderRadius: "15px 15px",
           }}
           onClick={() => setOpen(true)}
         >
@@ -100,6 +98,6 @@ const PersonalInformation = ({user}) => {
       </Modal>
     </>
   );
-}
+};
 
-export default PersonalInformation
+export default PersonalInformation;

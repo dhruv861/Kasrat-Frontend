@@ -28,7 +28,7 @@ const SearchExercises = ({ bodyPart, setBodyPart }) => {
   const handleSearch = async () => {
     if (search) {
       console.log(search);
-      console.log("----->>", getExerciseData.data);
+      // console.log("----->>", getExerciseData.data);
       const searchedExercises = getExerciseData.data.filter(
         (item) =>
           item.name.toLowerCase().includes(search) ||

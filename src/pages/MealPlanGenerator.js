@@ -9,8 +9,8 @@ import MealPlanImage from "../assets/images/amoon-ra-n8vDuIpGb0c-unsplash-remove
 import { useGetMealPlanQuery } from "../store/api/mealPlanApi";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 
-import MealPreferenceForm from "../components/MealPreferenceForm";
-import MealPlan from "../components/MealPlan";
+import MealPreferenceForm from "../components/Meal/MealPreferenceForm";
+import MealPlan from "../components/Meal/MealPlan";
 import { toast } from "react-hot-toast";
 import { userApi } from "../store/api/userApi";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ const MealPlanGenerator = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const result = useGetMealPlanQuery(preference);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (result.data) {

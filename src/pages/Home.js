@@ -9,7 +9,6 @@ export const Home = () => {
     <Box>
       <NewNavbar />
       <HeroBanner />
-      {/* <Footer /> */}
     </Box>
   );
 }

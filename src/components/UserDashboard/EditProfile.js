@@ -10,7 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { userApi } from "../store/api/userApi";
+import { userApi } from "../../store/api/userApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { setUser } from "../store/UserSlice";
@@ -24,11 +24,11 @@ const EditProfile = ({ userDetails, setModal }) => {
   const [height, setHeight] = useState(userDetails?.height);
   const [age, setAge] = useState(userDetails?.age);
   const [name, setName] = useState(userDetails?.name);
-  const[city, setCity] = useState(userDetails?.City);
+  const [city, setCity] = useState(userDetails?.City);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleEdit = async() => {
+  const handleEdit = async () => {
     dispatch(
       userApi.endpoints.updateProfile.initiate({
         gender,
@@ -36,17 +36,13 @@ const EditProfile = ({ userDetails, setModal }) => {
         height,
         age,
         name,
-        city
+        city,
       })
     ).then(() => dispatch(userApi.endpoints.getUserDetails.initiate()));
-    // await dispatch(userApi.endpoints.getUserDetails.initiate()).then((data) =>
-    // setUser(data.data)
-    // );
-    // redirect("userDashboard");
+    
     navigate("/userDashboard/");
     setModal(false);
 
-    // console.log("RESSS", result.data);
   };
 
   return (

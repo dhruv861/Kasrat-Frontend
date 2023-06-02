@@ -6,7 +6,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
-import PreferenceForm from "../components/PreferenceForm";
+import PreferenceForm from "../components/Exercise/PreferenceForm";
 import { useGetExercisePlanMutation } from "../store/api/exerciseApi";
 import ExercisePlan from "../components/Exercise/ExercisePlan";
 import { userApi } from "../store/api/userApi";

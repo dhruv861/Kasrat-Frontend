@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import HorizontalScrollBarNew from "./Exercise/HorizontalScrollBarNew";
-import ExercisePlan from "./Exercise/ExercisePlan";
-import Loader from "./Loader";
-import MealPlan from "./MealPlan";
+import HorizontalScrollBarNew from "../Exercise/HorizontalScrollBarNew";
+import ExercisePlan from "../Exercise/ExercisePlan";
+import Loader from "../Loader";
+import MealPlan from "../Meal/MealPlan";
 
 const UserDashboardDetails = ({ favourites, exerciseplan, mealplan }) => {
   console.log(favourites, exerciseplan);

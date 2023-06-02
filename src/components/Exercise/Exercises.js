@@ -5,14 +5,18 @@ import ExerciseCard from "./ExerciseCard";
 import Loader from "../Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setExercises } from "../../store/ExerciseSlice";
+import { useGetExercisesQuery,useFilterExerciseByBodyPartQuery } from "../../store/api/exerciseApi";
 
 const Exercises = ({ bodyPart }) => {
   // eslint-disable-next-line no-undef
-  const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
+  // const BASE_URL = process.env.REACT_APP_BACKEND_BASEURL;
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
   const exercises = useSelector((state) => state.exercise.exercises);
   const dispatch = useDispatch();
+  const getExerciseData = useGetExercisesQuery();
+  const getExerciseByBodyPartData = useFilterExerciseByBodyPartQuery(bodyPart);
+  
   
  if (document.getElementById("exercises")){
   document.getElementById("exercises").scrollIntoView(true,{behaviour:"smooth"})
@@ -23,14 +27,16 @@ const Exercises = ({ bodyPart }) => {
 
        if (bodyPart === "all") {
          // console.log("inside all");
-         const res = await fetch(`${BASE_URL}/exercises/`);
-         exercisesData = await res.json();
+        //  const res = await fetch(`${BASE_URL}/exercises/`);
+        //  exercisesData = await res.json();
+          exercisesData=getExerciseData.data
        } else if (bodyPart) {
          console.log("inside else");
-         const res = await fetch(
-           `${BASE_URL}/exercises/filter/?bodyPart=${bodyPart}`
-         );
-         exercisesData = await res.json();
+        //  const res = await fetch(
+        //    `${BASE_URL}/exercises/filter/?bodyPart=${bodyPart}`
+        //  );
+        //  exercisesData = await res.json();
+        exercisesData = getExerciseByBodyPartData.data;
        } else {
          exercisesData = [];
        }
@@ -40,7 +46,7 @@ const Exercises = ({ bodyPart }) => {
      };
 
      fetchExercisesData();
-   }, [bodyPart]);
+   }, [bodyPart,getExerciseByBodyPartData.data,getExerciseData.data]);
 
   // Pagination
   const indexOfLastExercise = currentPage * exercisesPerPage;

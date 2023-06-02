@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import NewNavbar from "../components/NewNavbar";
 import SearchExercises from "../components/Exercise/SearchExercises";
 import Exercises from "../components/Exercise/Exercises";
-// import Footer from "../components/Footer";
 
 const ExpolreExercises = () => {
   const [bodyPart, setBodyPart] = useState("");

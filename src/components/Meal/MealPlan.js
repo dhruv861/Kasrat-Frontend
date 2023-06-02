@@ -9,7 +9,6 @@ import { useTheme } from "@emotion/react";
 import AppBar from "@mui/material/AppBar";
 import MealCard from "./MealCard";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
