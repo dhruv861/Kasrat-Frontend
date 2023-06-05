@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../assets/styles/dashboard.module.css";
-import userImg from "../../assets/images/user.jpg";
+import userImg from "../../assets/images/profile.jpg";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import EditProfile from "./EditProfile";

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Stack, Typography } from "@mui/material";
+import {  Typography } from "@mui/material";
 import { useGetRecipeInformationQuery } from "../../store/api/mealPlanApi";
 
 const MealCard = ({ meal }) => {
@@ -10,7 +10,7 @@ const MealCard = ({ meal }) => {
     console.log(info.data);
   }, [info]);
   return (
-    <div className="exercise-card">
+    <div className="exercise-card" style={{borderRadius:"10px 15px", border:"outset"}}>
       <Link to={info.data?.spoonacularSourceUrl} target="_blank">
         <img src={info.data?.image} alt={meal.title} loading="lazy" />
         <Typography
@@ -25,8 +25,8 @@ const MealCard = ({ meal }) => {
           {meal.title}
         </Typography>
       </Link>
-      <Stack direction="row">
-        {/* <Button
+      {/* <Stack direction="row">
+        <Button
           sx={{
             ml: "21px",
             color: "#fff",
@@ -49,8 +49,8 @@ const MealCard = ({ meal }) => {
           }}
         >
           {meal.nutrients.protein}
-        </Button> */}
-      </Stack>
+        </Button>
+      </Stack> */}
     </div>
   );
 };

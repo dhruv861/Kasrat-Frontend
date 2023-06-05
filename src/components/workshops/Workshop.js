@@ -10,9 +10,9 @@ const Workshop = ({ room }) => {
     const currentTime = new Date();
     if (currentTime.getDay() ==0 || currentTime.getDay() == 6) {
       if (currentTime >= workshopTime) {
-        if (currentTime.getHours() >= workshopTime.getHours() +1) {
-          return toast.error("Sorry Workshop Ended");
-        }
+        // if (currentTime.getHours() >= workshopTime.getHours() +1) {
+        //   return toast.error("Sorry Workshop Ended");
+        // }
         return navigate(`/virtual-training/${roomName}/${roomId}`);
       } else if (currentTime < workshopTime) {
         return toast.loading("Workshop will start soon");

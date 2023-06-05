@@ -8,6 +8,7 @@ import { Avatar, Chip, Popover, Stack } from "@mui/material";
 // import { Link } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import PlusOneIcon from "@mui/icons-material/PlusOne";
+import { toast } from "react-hot-toast";
 
 const NewNavbar = () => {
   const user = useSelector((state) => state.userProfile.user);
@@ -26,11 +27,19 @@ const NewNavbar = () => {
       !user
     ) {
       // console.log("logged in", user);
-      dispatch(userApi.endpoints.getUserDetails.initiate(null)).then((data) => {
-        console.log("----", data);
-        dispatch(setUser(data.data));
-      });
-      dispatch(userApi.endpoints.getPlan.initiate(null))
+      try {
+        dispatch(userApi.endpoints.getUserDetails.initiate(null)).then(
+          (data) => {
+            console.log("----", data);
+            dispatch(setUser(data.data));
+          }
+        );
+        dispatch(userApi.endpoints.getPlan.initiate(null));
+      } catch (err) {
+        window.localStorage.removeItem("access");
+        window.localStorage.removeItem("refresh");
+        toast.error("Login Session Expired. Log In Again");
+      }
     }
   }, [user]);
 
@@ -224,7 +233,7 @@ const NewNavbar = () => {
                   horizontal: "left",
                 }}
                 PaperProps={{
-                  style: { width: "08%",textAlign:"center" },
+                  style: { width: "08%", textAlign: "center" },
                 }}
               >
                 <Stack direction={"column"}>
@@ -232,12 +241,12 @@ const NewNavbar = () => {
                     to={"/userDashboard"}
                     style={{
                       color: "#3A1212",
-                      padding:"5%"
+                      padding: "5%",
                     }}
                   >
                     Profile
                   </Link>
-                  
+
                   {/* <hr /> */}
                   <Link
                     onClick={() => {
@@ -246,7 +255,7 @@ const NewNavbar = () => {
                     }}
                     style={{
                       color: "#3A1212",
-                      padding:"5%"
+                      padding: "5%",
                     }}
                   >
                     Log Out

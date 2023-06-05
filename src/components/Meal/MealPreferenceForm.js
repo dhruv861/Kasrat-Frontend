@@ -12,7 +12,7 @@ import {
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-const CUISINE = ["Asian", "Indian", "Thai", "American", "Italian", "Chinese"];
+// const CUISINE = ["Asian", "Indian", "Thai", "American", "Italian", "Chinese"];
 
 const MealPreferenceForm = ({ closeModal, setPreference }) => {
   const user = useSelector((state)=>state.userProfile.user)
@@ -21,7 +21,7 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
   );
   const [goal, setGoal] = useState();
   const [diet, setDiet] = useState();
-  const [cuisine, setCuisine] = useState("");
+  // const [cuisine, setCuisine] = useState("");
   const [weight, setWeight] = useState(user.weight);
   const [height, setHeight] = useState(user.height);
   const [age, setAge] = useState(user.age);
@@ -30,7 +30,7 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
   const handleGender = (event) => setGender(event.target.value);
   const handleGoal = (event) => setGoal(event.target.value);
   const handleDiet = (event) => setDiet(event.target.value);
-  const handleCuisine = (event) => setCuisine(event.target.value);
+  // const handleCuisine = (event) => setCuisine(event.target.value);
 
   const calcBMR = (weight, height, age, gender) => {
     let s;
@@ -41,8 +41,8 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
   };
 
   const generatePlan = () => {
-    if (gender && goal && diet && cuisine && weight && height && age) {
-      console.log(gender, goal, diet, cuisine, weight, height, age);
+    if (gender && goal && diet && weight && height && age) {
+      console.log(gender, goal, diet, weight, height, age);
       const BMR = calcBMR(weight, height, age, gender);
       let calories = BMR;
       if (goal == "maintain") {
@@ -149,7 +149,7 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
         <FormHelperText>Your Diet Type </FormHelperText>
       </FormControl>
 
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-helper-label">Cuisine</InputLabel>
         <Select
           labelId="Cuisine"
@@ -165,7 +165,7 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
           ))}
         </Select>
         <FormHelperText>Your Diet Type </FormHelperText>
-      </FormControl>
+      </FormControl> */}
       <br></br>
       <Button
         style={{

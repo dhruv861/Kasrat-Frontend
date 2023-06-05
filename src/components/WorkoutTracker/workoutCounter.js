@@ -35,7 +35,7 @@ const styles = {
     width: 400,
     height: 100,
   },
-    selectBox: {
+  selectBox: {
     position: "absolute",
     marginRight: "auto",
     marginLeft: "auto",
@@ -131,8 +131,10 @@ function WorkoutCounter() {
       const position = results.poseLandmarks;
 
       // set height and width of canvas
-      canvasRef.current.width = webcamRef.current.video.videoWidth;
-      canvasRef.current.height = webcamRef.current.video.videoHeight;
+      canvasRef.current.width = webcamRef.current.video?.videoWidth
+        ? webcamRef.current.video.videoWidth
+        : 0;
+      canvasRef.current.height = webcamRef.current.video?.videoHeight;
 
       const { width, height } = canvasRef.current;
 
@@ -221,10 +223,12 @@ function WorkoutCounter() {
     ) {
       camera = new cam.Camera(webcamRef.current.video, {
         onFrame: async () => {
-          countTextbox.current.value = count;
+          if (countTextbox.current?.value) {
+            countTextbox.current.value = count;
+          }
           //console.log(count, dir)
           //console.log("hello",countTextbox.current.value)
-          await pose.send({ image: webcamRef.current.video });
+          await pose.send({ image: webcamRef.current?.video });
         },
         width: 640,
         height: 480,
