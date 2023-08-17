@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 const Workshop = ({ room }) => {
   const navigate = useNavigate();
   const enterRoom = (roomId, roomName, workshopTime) => {
-    console.log("RoomID", roomId, roomName, workshopTime);
     const currentTime = new Date();
     if (currentTime.getDay() ==0 || currentTime.getDay() == 6) {
       if (currentTime >= workshopTime) {
@@ -30,7 +29,6 @@ const Workshop = ({ room }) => {
 
   const workshopTime = new Date(year, monthIndex, day, hours);
 
-  console.log(workshopTime.toDateString());
 
   return (
     <div

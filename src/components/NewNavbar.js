@@ -26,11 +26,9 @@ const NewNavbar = () => {
       window.localStorage.getItem("refresh") &&
       !user
     ) {
-      // console.log("logged in", user);
       try {
         dispatch(userApi.endpoints.getUserDetails.initiate(null)).then(
           (data) => {
-            console.log("----", data);
             dispatch(setUser(data.data));
           }
         );

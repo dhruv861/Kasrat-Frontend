@@ -26,10 +26,8 @@ const MealPlanGenerator = () => {
 
   useEffect(() => {
     if (result.data) {
-      console.log("MEAL PLAN", result.data?.week);
       setPlan(result.data.week);
     }
-    console.log("", preference);
   }, [preference, result]);
 
   return (

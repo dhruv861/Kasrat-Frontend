@@ -31,7 +31,6 @@ const exerciseSlice = createSlice({
   initialState,
   reducers: {
     setExercises: (state, action) => {
-      console.log(action, "PAYLOAD");
       state.exercises = action.payload;
     },
     setBodyParts: (state, action)=> {

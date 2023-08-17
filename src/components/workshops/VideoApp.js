@@ -21,10 +21,8 @@ export default function VideoApp() {
 
   useEffect(() => {
     if (fetchRoomCode.isSuccess) {
-      console.log(fetchRoomCode.data.code);
       setRoomCode(fetchRoomCode.data.code);
     } else {
-      console.log("...loadingRoomCOde");
     }
   }, [fetchRoomCode]);
 

@@ -27,8 +27,6 @@ const SearchExercises = ({ bodyPart, setBodyPart }) => {
   }, [getBodyParts.data]);
   const handleSearch = async () => {
     if (search) {
-      console.log(search);
-      // console.log("----->>", getExerciseData.data);
       const searchedExercises = getExerciseData.data.filter(
         (item) =>
           item.name.toLowerCase().includes(search) ||
@@ -40,7 +38,6 @@ const SearchExercises = ({ bodyPart, setBodyPart }) => {
       window.scrollTo({ top: 900, left: 100, behavior: "smooth" });
 
       setSearch("");
-      console.log(searchedExercises);
       dispatch(setExercises(searchedExercises));
     }
   };

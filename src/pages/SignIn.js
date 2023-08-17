@@ -40,13 +40,11 @@ export default function SignIn() {
 
   useEffect(() => {
     if (googleAuthIsSuccess) {
-      console.log(googleAuthdata);
       window.localStorage.setItem("access", googleAuthdata.tokens.access);
       window.localStorage.setItem("refresh", googleAuthdata.tokens.refresh);
       navigate("/");
     }
     if (isSuccess) {
-      // console.log("LOGIN SUCCESFULL", data, "state", user);
       window.localStorage.setItem("access", data.token.access);
       window.localStorage.setItem("refresh", data.token.refresh);
       toast.success("You're Logged In Succesfully");
@@ -60,10 +58,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+   
     loginUser({
       email: data.get("email"),
       password: data.get("password"),

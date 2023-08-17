@@ -14,10 +14,7 @@ import ExerciseVideos from "../components/Exercise/ExerciseVideos";
 import SimilarExercises from "../components/Exercise/SimilarExercises";
 
 const ExerciseDetail = () => {
-  console.log(
-    typeof process.env.REACT_APP_RAPIDAPI_KEY,"-----",
-    typeof process.env.REACT_APP_RAPIDAPI_HOST
-  );
+  
   const [exerciseDetail, setExerciseDetail] = useState({});
   const [exerciseVideos, setExerciseVideos] = useState([]);
   const { id } = useParams();
@@ -44,8 +41,6 @@ const ExerciseDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    console.log("TARGET", targetMuscleExercisesData.data);
-    console.log("EQUIPMENT", equimentExercisesData.data);
 
     setExerciseDetail(exerciseDetailData.data);
 

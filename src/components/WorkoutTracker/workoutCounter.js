@@ -107,7 +107,6 @@ function WorkoutCounter() {
   const countTextbox = useRef(null);
 
   const angleBetweenThreePoints = (pos) => {
-    //console.log("Reached angle")
     //vertexed around p1
 
     const a =
@@ -148,28 +147,21 @@ function WorkoutCounter() {
           y: position[indexArray[i]].y * height,
         });
       }
-      //console.log(upadatedPos)
       angle = Math.round(angleBetweenThreePoints(upadatedPos));
-      //console.log("Angle is getting updated ",angle)
 
       // Count reps
       //0 is down, 1 is up
       if (angle > exrInfo[exercise].ul) {
-        console.log("test angle ", angle);
         if (dir === 0) {
           //count.current = count.current + 0.5
-          console.log(count, " ", dir, " decrement ", angle);
           dir = 1;
         }
       }
       if (angle < exrInfo[exercise].ll && dir === 1) {
-        console.log("complete");
         count = count + 1;
-        console.log(count, " ", dir, " increment ", angle);
         dir = 0;
       }
 
-      //console.log(count.current)
       const canvasElement = canvasRef.current;
       const canvasCtx = canvasElement.getContext("2d");
       canvasCtx.save();
@@ -198,11 +190,8 @@ function WorkoutCounter() {
   }
 
   useEffect(() => {
-    console.log("rendered");
     count = 0;
     dir = 0;
-    //console.log(count.current)
-    //console.log("rendered counter")
     const pose = new Pose({
       locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4.1624666670/${file}`;
@@ -226,8 +215,6 @@ function WorkoutCounter() {
           if (countTextbox.current?.value) {
             countTextbox.current.value = count;
           }
-          //console.log(count, dir)
-          //console.log("hello",countTextbox.current.value)
           await pose.send({ image: webcamRef.current?.video });
         },
         width: 640,
@@ -236,9 +223,7 @@ function WorkoutCounter() {
       camera.start();
     }
   });
-  //console.log(props)
   function resetCount() {
-    console.log("clicked");
     count = 0;
     dir = 0;
   }

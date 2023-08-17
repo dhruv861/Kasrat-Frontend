@@ -42,7 +42,6 @@ export default function SignUp() {
 
   useEffect(() => {
     if (googleAuthIsSuccess) {
-      console.log(googleAuthdata);
       window.localStorage.setItem("access", googleAuthdata.tokens.access);
       window.localStorage.setItem("refresh", googleAuthdata.tokens.refresh);
       navigate("/");
@@ -50,7 +49,6 @@ export default function SignUp() {
     if (isSuccess) {
       //   toast.success('User registered successfully');
       //   navigate('/verifyemail');
-      console.log("LOGIN SUCCESFULL", data, "state");
       window.localStorage.setItem("access", data.token.access);
       window.localStorage.setItem("refresh", data.token.refresh);
       navigate("/");
@@ -64,12 +62,7 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      email: data.get("email"),
-      password: data.get("password"),
-      password2: data.get("confirmPassword"),
-    });
+    
     registerUser({
       name: data.get("name"),
       email: data.get("email"),
@@ -188,7 +181,7 @@ export default function SignUp() {
             <Box style={{ padding: "0 18%", margin: "5% 0" }}>
               <GoogleLogin
                 onSuccess={(res) => googleLogin(res.credential)}
-                onError={(err) => console.log("GOOOO", err)}
+                onError={(err) => console.log("GOOGLE", err)}
               />
             </Box>
             <Grid container justifyContent="flex-end">

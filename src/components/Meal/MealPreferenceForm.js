@@ -42,7 +42,6 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
 
   const generatePlan = () => {
     if (gender && goal && diet && weight && height && age) {
-      console.log(gender, goal, diet, weight, height, age);
       const BMR = calcBMR(weight, height, age, gender);
       let calories = BMR;
       if (goal == "maintain") {
@@ -50,7 +49,6 @@ const MealPreferenceForm = ({ closeModal, setPreference }) => {
       } else if (goal == "weight gain") {
         calories = BMR * 1.75;
       }
-      console.log("BMR", BMR, calories);
       setPreference({ diet, calories });
       closeModal();
     } else {

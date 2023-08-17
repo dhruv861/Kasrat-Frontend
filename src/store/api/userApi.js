@@ -61,7 +61,6 @@ export const userApi = createApi({
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         await queryFulfilled;
-        console.log("fullfiled");
         dispatch(userApi.endpoints.getPlan.initiate());
       },
     }),

@@ -4,7 +4,6 @@ import Loader from "../Loader";
 import HorizontalScrollBarNew from "./HorizontalScrollBarNew";
 
 const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
-  console.log(targetMuscleExercises);
   return (
     <Box sx={{ mt: { lg: "100px", xs: "0px" } }}>
       <Typography

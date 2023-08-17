@@ -9,12 +9,10 @@ const EnterRoom = ({ code }) => {
   const user = useSelector((state) => state.userProfile.user);
 
   const hmsActions = useHMSActions();
-  console.log("EnterRoom", code);
 
   const enter = async () => {
     const userName = user.name;
     const roomCode = code;
-    console.log("inside", roomCode);
     const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode });
 
     try {

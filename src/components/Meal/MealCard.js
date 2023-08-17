@@ -5,9 +5,7 @@ import { useGetRecipeInformationQuery } from "../../store/api/mealPlanApi";
 
 const MealCard = ({ meal }) => {
   const info = useGetRecipeInformationQuery(meal.id);
-  console.log(meal);
   useEffect(() => {
-    console.log(info.data);
   }, [info]);
   return (
     <div className="exercise-card" style={{borderRadius:"10px 15px", border:"outset"}}>

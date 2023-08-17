@@ -16,7 +16,6 @@ const UserDashboard = () => {
     } catch (e) {
       console.log(e);
     }
-    console.log(user);
   }, [user, user.user, user.plan]);
 
   return (

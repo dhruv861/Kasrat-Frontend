@@ -9,10 +9,8 @@ const Workshops = () => {
   const fetchRooms = useGetRoomsQuery();
   useEffect(() => {
     if (fetchRooms.isSuccess) {
-      console.log(fetchRooms.data.rooms)
       setRooms(fetchRooms.data.rooms);
     } else {
-      console.log("...loadingRooms");
     }
   }, [fetchRooms.data]);
 

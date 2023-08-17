@@ -93,7 +93,6 @@ const PreferenceForm = ({ getExercisePlan, closeModal }) => {
   ];
 
   const generatePlan = () => {
-    console.log(days, bodypart, equipment, targetMuscles, workoutTime);
     if (days && bodypart && equipment && targetMuscles && workoutTime) {
       getExercisePlan({
         preferences: {

@@ -5,7 +5,10 @@ import ExerciseCard from "./ExerciseCard";
 import Loader from "../Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setExercises } from "../../store/ExerciseSlice";
-import { useGetExercisesQuery,useFilterExerciseByBodyPartQuery } from "../../store/api/exerciseApi";
+import {
+  useGetExercisesQuery,
+  useFilterExerciseByBodyPartQuery,
+} from "../../store/api/exerciseApi";
 
 const Exercises = ({ bodyPart }) => {
   // eslint-disable-next-line no-undef
@@ -16,45 +19,41 @@ const Exercises = ({ bodyPart }) => {
   const dispatch = useDispatch();
   const getExerciseData = useGetExercisesQuery();
   const getExerciseByBodyPartData = useFilterExerciseByBodyPartQuery(bodyPart);
-  
-  
- if (document.getElementById("exercises")){
-  document.getElementById("exercises").scrollIntoView(true,{behaviour:"smooth"})
- }
-   useEffect(() => {
-     const fetchExercisesData = async () => {
-       let exercisesData = [];
 
-       if (bodyPart === "all") {
-         // console.log("inside all");
+  if (document.getElementById("exercises")) {
+    document
+      .getElementById("exercises")
+      .scrollIntoView(true, { behaviour: "smooth" });
+  }
+  useEffect(() => {
+    const fetchExercisesData = async () => {
+      let exercisesData = [];
+
+      if (bodyPart === "all") {
         //  const res = await fetch(`${BASE_URL}/exercises/`);
         //  exercisesData = await res.json();
-          exercisesData=getExerciseData.data
-       } else if (bodyPart) {
-         console.log("inside else");
+        exercisesData = getExerciseData.data;
+      } else if (bodyPart) {
         //  const res = await fetch(
         //    `${BASE_URL}/exercises/filter/?bodyPart=${bodyPart}`
         //  );
         //  exercisesData = await res.json();
         exercisesData = getExerciseByBodyPartData.data;
-       } else {
-         exercisesData = [];
-       }
-       console.log("excersises", exercisesData);
+      } else {
+        exercisesData = [];
+      }
 
-       dispatch(setExercises(exercisesData));
-     };
+      dispatch(setExercises(exercisesData || []));
+    };
 
-     fetchExercisesData();
-   }, [bodyPart,getExerciseByBodyPartData.data,getExerciseData.data]);
+    fetchExercisesData();
+  }, [bodyPart, getExerciseByBodyPartData.data, getExerciseData.data]);
 
   // Pagination
   const indexOfLastExercise = currentPage * exercisesPerPage;
   const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
 
-  console.log(exercises);
-
-  const currentExercises = exercises.slice(
+  const currentExercises = exercises?.slice(
     indexOfFirstExercise,
     indexOfLastExercise
   );
@@ -65,7 +64,7 @@ const Exercises = ({ bodyPart }) => {
     window.scrollTo({ top: 1800, behavior: "smooth" });
   };
 
-  if (exercises.length === 0) {
+  if (exercises?.length === 0) {
     return;
   }
 
