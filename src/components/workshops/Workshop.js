@@ -7,11 +7,11 @@ const Workshop = ({ room }) => {
   const navigate = useNavigate();
   const enterRoom = (roomId, roomName, workshopTime) => {
     const currentTime = new Date();
-    if (currentTime.getDay() ==0 || currentTime.getDay() == 6) {
-      if (currentTime >= workshopTime) {
-        // if (currentTime.getHours() >= workshopTime.getHours() +1) {
-        //   return toast.error("Sorry Workshop Ended");
-        // }
+    if (currentTime.getDay() == 0 || currentTime.getDay() == 6) {
+      if (currentTime >= workshopTime) {// eslint-disable-next-line
+        if (currentTime.getHours() >= workshopTime.getHours() + 1) {// eslint-disable-next-line
+          return toast.error("Sorry Workshop Ended");
+        }
         return navigate(`/virtual-training/${roomName}/${roomId}`);
       } else if (currentTime < workshopTime) {
         return toast.loading("Workshop will start soon");
@@ -28,7 +28,6 @@ const Workshop = ({ room }) => {
   const hours = parseInt(room.time);
 
   const workshopTime = new Date(year, monthIndex, day, hours);
-
 
   return (
     <div

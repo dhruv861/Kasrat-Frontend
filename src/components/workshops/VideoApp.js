@@ -23,6 +23,7 @@ export default function VideoApp() {
     if (fetchRoomCode.isSuccess) {
       setRoomCode(fetchRoomCode.data.code);
     } else {
+      console.log("...loadingRoomCOde");
     }
   }, [fetchRoomCode]);
 

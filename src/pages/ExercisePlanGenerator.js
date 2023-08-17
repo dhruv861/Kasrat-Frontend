@@ -40,8 +40,6 @@ const ExercisePlanGenerator = () => {
     if (isLoading) {
       console.log("loading.....");
     }
-    if (isSuccess) {
-    }
     if (isError) {
       console.log(error);
     }
