@@ -38,7 +38,7 @@ function HorizontalScrollBarNew({ items, bodyParts, setBodyPart, bodyPart }) {
     <>
       <div onMouseEnter={disableScroll} onMouseLeave={enableScroll}>
         <ScrollMenu Footer={Arrows} onWheel={onWheel}>
-          {items.map((item, index) =>
+          {items?.map((item, index) =>
             bodyParts ? (
               <BodyPart
                 item={item}

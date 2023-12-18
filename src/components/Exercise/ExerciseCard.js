@@ -10,9 +10,9 @@ const ExerciseCard = ({ exercise }) => {
   const user = useSelector((state) => state.userProfile.user);
   const dispatch = useDispatch();
   const fav = user?.favourites.some((fav) => fav.id == exercise.id);
-  
+
   return (
-    <div className="exercise-card">
+    <div className="exercise-card" onClick={() => window.scrollTo({ top: 0 })}>
       <Link to={`/exercise/${exercise.id}`}>
         <img src={exercise.gifUrl} alt={exercise.name} loading="lazy" />
         <Typography

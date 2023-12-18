@@ -14,7 +14,6 @@ import ExerciseVideos from "../components/Exercise/ExerciseVideos";
 import SimilarExercises from "../components/Exercise/SimilarExercises";
 
 const ExerciseDetail = () => {
-  
   const [exerciseDetail, setExerciseDetail] = useState({});
   const [exerciseVideos, setExerciseVideos] = useState([]);
   const { id } = useParams();
@@ -34,8 +33,8 @@ const ExerciseDetail = () => {
   const youtubeOptions = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key":process.env.REACT_APP_RAPIDAPI_KEY,
-      "X-RapidAPI-Host":process.env.REACT_APP_RAPIDAPI_HOST,
+      "X-RapidAPI-Key": process.env.REACT_APP_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": process.env.REACT_APP_RAPIDAPI_HOST,
     },
   };
 
@@ -70,13 +69,13 @@ const ExerciseDetail = () => {
   ]);
 
   if (!exerciseDetail) {
-    return <div>No Data</div>;
+    return <Loader />;
   }
 
   return (
     <>
       <NewNavbar />
-      <Box style={{marginTop:"5.5%"}}>
+      <Box style={{ marginTop: "5.5%" }}>
         {/* {exerciseDetailData.isLoading &&
         equimentExercisesData.isLoading &&
       targetMuscleExercisesData.isLoading && <Loader />} */}
@@ -102,7 +101,6 @@ const ExerciseDetail = () => {
               equipmentExercises={equimentExercisesData.data}
             />
           )}
-        
       </Box>
     </>
   );

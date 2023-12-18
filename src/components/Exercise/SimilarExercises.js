@@ -19,7 +19,7 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
         exercises
       </Typography>
       <Box sx={{ p: 2, position: "relative" }}>
-        {targetMuscleExercises.length !== 0 ? (
+        {targetMuscleExercises.length && targetMuscleExercises.length !== 0 ? (
           <>
             <div className="outerscroll">
               <HorizontalScrollBarNew items={targetMuscleExercises} />
@@ -46,7 +46,7 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
         exercises&nbsp;
       </Typography>
       <Box sx={{ p: 2, position: "relative" }}>
-        {equipmentExercises.length !== 0 ? (
+        {equipmentExercises.length && equipmentExercises.length !== 0 ? (
           <HorizontalScrollBarNew items={equipmentExercises} />
         ) : (
           <Loader />
